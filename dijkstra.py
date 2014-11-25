@@ -1,70 +1,202 @@
-def dijkstra(graph,src,dest,visited=[],distances={},predecessors={}):
-    """ calculates a shortest path tree routed in src
+import sys
+
+class Vertex:
+    def __init__(self, node):
+        self.id = node
+        self.adjacent = {}
+        # Set distance to infinity for all nodes
+        self.distance = sys.maxint
+        # Mark all nodes unvisited
+        self.visited = False
+        # Predecessor
+        self.previous = None
+
+    def add_neighbor(self, neighbor, weight=0):
+        self.adjacent[neighbor] = weight
+
+    def get_connections(self):
+        return self.adjacent.keys()
+
+    def get_id(self):
+        return self.id
+
+    def get_weight(self, neighbor):
+        return self.adjacent[neighbor]
+
+    def set_distance(self, dist):
+        self.distance = dist
+
+    def get_distance(self):
+        return self.distance
+
+    def set_previous(self, prev):
+        self.previous = prev
+
+    def set_visited(self):
+        self.visited = True
+
+    def __str__(self):
+        return str(self.id) + ' adjacent: ' + str([x.id for x in self.adjacent])
+
+class Graph:
+    def __init__(self):
+        self.vert_dict = {}
+        self.num_vertices = 0
+
+    def __iter__(self):
+        return iter(self.vert_dict.values())
+
+    def add_vertex(self, node):
+        self.num_vertices = self.num_vertices + 1
+        new_vertex = Vertex(node)
+        self.vert_dict[node] = new_vertex
+        return new_vertex
+
+    def get_vertex(self, n):
+        if n in self.vert_dict:
+            return self.vert_dict[n]
+        else:
+            return None
+
+    def add_edge(self, frm, to, cost = 0):
+        if frm not in self.vert_dict:
+            self.add_vertex(frm)
+        if to not in self.vert_dict:
+            self.add_vertex(to)
+
+        self.vert_dict[frm].add_neighbor(self.vert_dict[to], cost)
+        self.vert_dict[to].add_neighbor(self.vert_dict[frm], cost)
+
+    def get_vertices(self):
+        return self.vert_dict.keys()
+
+    def set_previous(self, current):
+        self.previous = current
+
+    def get_previous(self, current):
+        return self.previous
+
+def shortest(v, path):
+    ''' make shortest path from v.previous'''
+    if v.previous:
+        path.append(v.previous.get_id())
+        shortest(v.previous, path)
+    return
+
+import heapq
+
+def dijkstra(aGraph, start):
+    print '''Dijkstra's shortest path'''
+    # Set the distance for the start node to zero
+    start.set_distance(0)
+
+    # Put tuple pair into the priority queue
+    unvisited_queue = [(v.get_distance(),v) for v in aGraph]
+    heapq.heapify(unvisited_queue)
+
+    while len(unvisited_queue):
+        # Pops a vertex with the smallest distance
+        uv = heapq.heappop(unvisited_queue)
+        current = uv[1]
+        current.set_visited()
+
+        #for next in v.adjacent:
+        for next in current.adjacent:
+            # if visited, skip
+            if next.visited:
+                continue
+            new_dist = current.get_distance() + current.get_weight(next)
+
+            if new_dist < next.get_distance():
+                next.set_distance(new_dist)
+                next.set_previous(current)
+                #print 'updated : current = %s next = %s new_dist = %s' \
+                       # %(current.get_id(), next.get_id(), next.get_distance())
+            #else:
+                #print 'not updated : current = %s next = %s new_dist = %s' \
+                       # %(current.get_id(), next.get_id(), next.get_distance())
+
+        # Rebuild heap
+        # 1. Pop every item
+        while len(unvisited_queue):
+            heapq.heappop(unvisited_queue)
+        # 2. Put all vertices not visited into the queue
+        unvisited_queue = [(v.get_distance(),v) for v in aGraph if not v.visited]
+        heapq.heapify(unvisited_queue)
+
+
+if __name__ == '__main__':
+
+    f = open('USA.txt')
+    lines = f.readlines()
+    #content = f.readlines()
+    #print (lines)
     """
-    # a few sanity checks
-    if src not in graph:
-        raise TypeError('the root of the shortest path tree cannot be found in the graph')
-    if dest not in graph:
-        raise TypeError('the target of the shortest path cannot be found in the graph')
-    # ending condition
-    if src == dest:
-        # We build the shortest path and display it
-        path=[]
-        pred=dest
-        while pred != None:
-            path.append(pred)
-            pred=predecessors.get(pred,None)
-        print('shortest path: '+str(path)+" cost="+str(distances[dest]))
-    else :
-        # if it is the initial  run, initializes the cost
-        if not visited:
-            distances[src]=0
-        # visit the neighbors
-        for neighbor in graph[src] :
-            if neighbor not in visited:
-                new_distance = distances[src] + graph[src][neighbor]
-                if new_distance < distances.get(neighbor,float('inf')):
-                    distances[neighbor] = new_distance
-                    predecessors[neighbor] = src
-        # mark as visited
-        visited.append(src)
-        # now that all neighbors have been visited: recurse
-        # select the non visited node with lowest distance 'x'
-        # run Dijskstra with src='x'
-        unvisited={}
-        for k in graph:
-            if k not in visited:
-                unvisited[k] = distances.get(k,float('inf'))
-        x=min(unvisited, key=unvisited.get)
-        dijkstra(graph,x,dest,visited,distances,predecessors)
+    current = 1
+    while current < len(lines):
+        line = lines[current].split("\\s")
+        line =" ".join(line[0].split())
+        line =  line.split(" ")
+        costf = 100000000/(float(line[2]))
+        print "From " + line[0] + " To " + line[1] + " cost=" + str(costf) + " Delay " + line[3]
+        current += 1
+        """
+    #line1 = lines[1].split("\\s")
+    #line1 =" ".join(line1[0].split())
+    #line1 =  line1.split(" ");
+    #print line1[2]
+    f.close()
+    g = Graph()
+    #number = lines[0].split("\\s")
 
 
+    count = 0
+    while count < 26:
+        g.add_vertex(str(count))
+        count += 1
 
-if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testName']
-    #unittest.main()
-    graph = {'1': {'2': 66, '5': 66, '6': 66},
-            '2': {'3': 50, '7': 66, '11': 50},
-            '3': {'4': 66, '8': 66},
-            '4': {'9': 100},
-            '5': {'10': 66},
-            '6': {'10': 66, '11': 50},
-            '7': {'8': 66, '12': 50},
-            '8': {'9': 66},
-            '10': {'11': 66},
-            '11': {'12': 66, '13': 50},
-            '12': {'14': 50, '18': 50},
-            '13': {'15': 66, '17': 66},
-            '14': {'22': 66, '24': 66},
-            '15': {'16': 100, '18': 100},
-            '16': {'18': 100},
-            '17': {'18': 66, '19': 100, '21': 66},
-            '18': {'21': 100},
-            '19': {'20': 100},
-            '20': {'22': 66},
-            '21': {'22': 66},
-            '22': {'23': 45},
-            '23': {'25': 58},
-            '24': {'25': 66, '26': 100},
-            '25': {'26': 100}}
-dijkstra(graph,'1','19')
+    delay = []
+    current = 1
+    while current < len(lines):
+        line = lines[current].split("\\s")
+        line =" ".join(line[0].split())
+        line =  line.split(" ")
+        costf = 100000000/(float(line[2]))
+        #print "From " + line[0] + " To " + line[1] + " cost=" + str(costf) + " Delay " + line[3]
+        g.add_edge(str(line[0]), str(line[1]), costf)
+        delay.append(line[3])
+        current += 1
+
+
+    """
+    g.add_vertex('a')
+    g.add_vertex('b')
+    g.add_vertex('c')
+    g.add_vertex('d')
+    g.add_vertex('e')
+    g.add_vertex('f')
+
+    g.add_edge('a', 'b', 7)
+    g.add_edge('a', 'c', 9)
+    g.add_edge('a', 'f', 14)
+    g.add_edge('b', 'c', 10)
+    g.add_edge('b', 'd', 15)
+    g.add_edge('c', 'd', 11)
+    g.add_edge('c', 'f', 2)
+    g.add_edge('d', 'e', 6)
+    g.add_edge('e', 'f', 9)
+    """
+    print 'Graph data:'
+    for v in g:
+        for w in v.get_connections():
+            vid = v.get_id()
+            wid = w.get_id()
+            print '( %s , %s, %3d)'  % ( vid, wid, v.get_weight(w))
+
+
+    dijkstra(g, g.get_vertex('1'))
+
+    target = g.get_vertex('18')
+    path = [target.get_id()]
+    shortest(target, path)
+    print 'The shortest path : %s' %(path[::-1])
