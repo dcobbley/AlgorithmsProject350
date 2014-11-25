@@ -129,26 +129,8 @@ if __name__ == '__main__':
 
     f = open('USA.txt')
     lines = f.readlines()
-    #content = f.readlines()
-    #print (lines)
-    """
-    current = 1
-    while current < len(lines):
-        line = lines[current].split("\\s")
-        line =" ".join(line[0].split())
-        line =  line.split(" ")
-        costf = 100000000/(float(line[2]))
-        print "From " + line[0] + " To " + line[1] + " cost=" + str(costf) + " Delay " + line[3]
-        current += 1
-        """
-    #line1 = lines[1].split("\\s")
-    #line1 =" ".join(line1[0].split())
-    #line1 =  line1.split(" ");
-    #print line1[2]
     f.close()
     g = Graph()
-    #number = lines[0].split("\\s")
-
 
     count = 0
     while count < 26:
@@ -167,25 +149,6 @@ if __name__ == '__main__':
         delay.append(line[3])
         current += 1
 
-
-    """
-    g.add_vertex('a')
-    g.add_vertex('b')
-    g.add_vertex('c')
-    g.add_vertex('d')
-    g.add_vertex('e')
-    g.add_vertex('f')
-
-    g.add_edge('a', 'b', 7)
-    g.add_edge('a', 'c', 9)
-    g.add_edge('a', 'f', 14)
-    g.add_edge('b', 'c', 10)
-    g.add_edge('b', 'd', 15)
-    g.add_edge('c', 'd', 11)
-    g.add_edge('c', 'f', 2)
-    g.add_edge('d', 'e', 6)
-    g.add_edge('e', 'f', 9)
-    """
     print 'Graph data:'
     for v in g:
         for w in v.get_connections():
@@ -194,7 +157,7 @@ if __name__ == '__main__':
             print '( %s , %s, %3d)'  % ( vid, wid, v.get_weight(w))
 
 
-    dijkstra(g, g.get_vertex('1'))
+    dijkstra(g, g.get_vertex('26'))
 
     target = g.get_vertex('18')
     path = [target.get_id()]
