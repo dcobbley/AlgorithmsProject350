@@ -137,7 +137,7 @@ if __name__ == '__main__':
         g.add_vertex(str(count))
         count += 1
 
-    delay = []
+    linkLength = []
     current = 1
     while current < len(lines):
         line = lines[current].split("\\s")
@@ -146,7 +146,7 @@ if __name__ == '__main__':
         costf = 100000000/(float(line[2]))
         #print "From " + line[0] + " To " + line[1] + " cost=" + str(costf) + " Delay " + line[3]
         g.add_edge(str(line[0]), str(line[1]), costf)
-        delay.append(line[3])
+        linkLength.append(line[3])
         current += 1
 
     print 'Graph data:'
