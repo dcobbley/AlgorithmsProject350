@@ -10,6 +10,8 @@ class Vertex:
         self.visited = False
         # Predecessor
         self.previous = None
+        #Link length
+        self.length = sys.maxint
 
     def add_neighbor(self, neighbor, weight=0):
         self.adjacent[neighbor] = weight
@@ -34,6 +36,12 @@ class Vertex:
 
     def set_visited(self):
         self.visited = True
+
+    def set_length(self, len):
+        self.length = len
+
+    def get_length(self):
+        return self.length
 
     def __str__(self):
         return str(self.id) + ' adjacent: ' + str([x.id for x in self.adjacent])
@@ -66,6 +74,7 @@ class Graph:
 
         self.vert_dict[frm].add_neighbor(self.vert_dict[to], cost)
         self.vert_dict[to].add_neighbor(self.vert_dict[frm], cost)
+        #self.vert_dict
 
     def get_vertices(self):
         return self.vert_dict.keys()
@@ -124,8 +133,20 @@ def dijkstra(aGraph, start):
         unvisited_queue = [(v.get_distance(),v) for v in aGraph if not v.visited]
         heapq.heapify(unvisited_queue)
 
+import time
 
 if __name__ == '__main__':
+    start = time.time()
+    L = 1500  # length of packet in bytes
+    processDelay = 0.0001  # processing delay 1msec
+    propDelay = 0.000005  # prop delay
+    dpq = 0.92 # average traffic
+
+    """
+    Delay equation
+    D(F) = 1/o SUM ((Fij/(Cij - Fij)) + (Pij + Ti)(Fij/L))
+    O = Sum pEN Sum qEN dpq
+    """
 
     f = open('USA.txt')
     lines = f.readlines()
@@ -133,11 +154,17 @@ if __name__ == '__main__':
     g = Graph()
 
     count = 0
-    while count < 26:
+    tempN = lines[0].split("\\s")
+    tempN = " ".join(tempN[0].split())
+    tempN = tempN.split(" ")
+    N = int(tempN[0])
+
+    while count < N:
         g.add_vertex(str(count))
         count += 1
 
     linkLength = []
+    M = len(lines)
     current = 1
     while current < len(lines):
         line = lines[current].split("\\s")
@@ -157,9 +184,13 @@ if __name__ == '__main__':
             print '( %s , %s, %3d)'  % ( vid, wid, v.get_weight(w))
 
 
-    dijkstra(g, g.get_vertex('26'))
+    dijkstra(g, g.get_vertex('1'))
 
-    target = g.get_vertex('18')
+    target = g.get_vertex('11')
     path = [target.get_id()]
     shortest(target, path)
     print 'The shortest path : %s' %(path[::-1])
+    delta = (1/((N*(N-1))*dpq))  # n(n-1)dpq
+    print "Delta = " + str(delta)
+    finish = time.time() - start
+    print finish
