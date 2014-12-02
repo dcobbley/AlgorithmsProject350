@@ -140,7 +140,8 @@ if __name__ == '__main__':
     L = 1500  # length of packet in bytes
     processDelay = 0.0001  # processing delay 1msec
     propDelay = 0.000005  # prop delay
-    dpq = 0.92 # average traffic
+    dpq = 0.92  # average traffic
+    cost = 100000000  # base cost
 
     """
     Delay equation
@@ -168,29 +169,36 @@ if __name__ == '__main__':
     current = 1
     while current < len(lines):
         line = lines[current].split("\\s")
-        line =" ".join(line[0].split())
-        line =  line.split(" ")
-        costf = 100000000/(float(line[2]))
+        line = " ".join(line[0].split())
+        line = line.split(" ")
+        metric = cost/(float(line[2]))
         #print "From " + line[0] + " To " + line[1] + " cost=" + str(costf) + " Delay " + line[3]
-        g.add_edge(str(line[0]), str(line[1]), costf)
+        g.add_edge(str(line[0]), str(line[1]), metric)
         linkLength.append(line[3])
         current += 1
-
+    """
     print 'Graph data:'
     for v in g:
         for w in v.get_connections():
             vid = v.get_id()
             wid = w.get_id()
             print '( %s , %s, %3d)'  % ( vid, wid, v.get_weight(w))
+    """
 
+    for x in xrange(1, 26):
+        dijkstra(g, g.get_vertex(str(x)))
+        for y in xrange(1, 26):
+            target = g.get_vertex(str(y))
+            path = [target.get_id()]
+            shortest(target, path)
+            print 'The shortest path : %s' % (path[::-1])
 
-    dijkstra(g, g.get_vertex('1'))
-
+    """
     target = g.get_vertex('11')
     path = [target.get_id()]
     shortest(target, path)
-    print 'The shortest path : %s' %(path[::-1])
+    print 'The shortest path : %s' %(path[::-1])"""
     delta = (1/((N*(N-1))*dpq))  # n(n-1)dpq
     print "Delta = " + str(delta)
     finish = time.time() - start
-    print finish
+    print "Time taken: " + str(finish)
