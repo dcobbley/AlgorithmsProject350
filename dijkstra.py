@@ -40,6 +40,9 @@ class Vertex:
     def set_length(self, len):
         self.length = len
 
+    def reset_visited(self):
+        self.visited = False
+
     def get_length(self):
         return self.length
 
@@ -95,9 +98,15 @@ def shortest(v, path):
 import heapq
 
 def dijkstra(aGraph, start):
+    #next = 0
+    #current = 0
+    new_dist = None
+    unvisited_queue = None
+
     print '''Dijkstra's shortest path'''
     # Set the distance for the start node to zero
     start.set_distance(0)
+    print start
 
     # Put tuple pair into the priority queue
     unvisited_queue = [(v.get_distance(),v) for v in aGraph]
@@ -109,29 +118,34 @@ def dijkstra(aGraph, start):
         current = uv[1]
         current.set_visited()
 
+
         #for next in v.adjacent:
         for next in current.adjacent:
             # if visited, skip
+
             if next.visited:
                 continue
+
             new_dist = current.get_distance() + current.get_weight(next)
 
             if new_dist < next.get_distance():
                 next.set_distance(new_dist)
                 next.set_previous(current)
-                #print 'updated : current = %s next = %s new_dist = %s' \
-                       # %(current.get_id(), next.get_id(), next.get_distance())
-            #else:
-                #print 'not updated : current = %s next = %s new_dist = %s' \
-                       # %(current.get_id(), next.get_id(), next.get_distance())
+                print 'updated : current = %s next = %s new_dist = %s' \
+                        %(current.get_id(), next.get_id(), next.get_distance())
+            else:
+                print 'not updated : current = %s next = %s new_dist = %s' \
+                        %(current.get_id(), next.get_id(), next.get_distance())
 
         # Rebuild heap
         # 1. Pop every item
         while len(unvisited_queue):
             heapq.heappop(unvisited_queue)
+
         # 2. Put all vertices not visited into the queue
         unvisited_queue = [(v.get_distance(),v) for v in aGraph if not v.visited]
         heapq.heapify(unvisited_queue)
+    current.reset_visited()
 
 import time
 
@@ -142,6 +156,7 @@ if __name__ == '__main__':
     propDelay = 0.000005  # prop delay
     dpq = 0.92  # average traffic
     cost = 100000000  # base cost
+    Cij = []
 
     """
     Delay equation
@@ -176,6 +191,8 @@ if __name__ == '__main__':
         g.add_edge(str(line[0]), str(line[1]), metric)
         linkLength.append(line[3])
         current += 1
+    #dijkstra(g, g.get_vertex('9'))
+    #dijkstra(g, g.get_vertex('2'))
     """
     print 'Graph data:'
     for v in g:
@@ -184,14 +201,16 @@ if __name__ == '__main__':
             wid = w.get_id()
             print '( %s , %s, %3d)'  % ( vid, wid, v.get_weight(w))
     """
+    dijkstra(g, g.get_vertex('9'))
+    for x in xrange(1, 27):
+        target = g.get_vertex(str(x))
+        path = [target.get_id()]
+        shortest(target, path)
+        print 'The shortest path : %s' % (path[::-1])
 
-    for x in xrange(1, 26):
-        dijkstra(g, g.get_vertex(str(x)))
-        for y in xrange(1, 26):
-            target = g.get_vertex(str(y))
-            path = [target.get_id()]
-            shortest(target, path)
-            print 'The shortest path : %s' % (path[::-1])
+
+
+
 
     """
     target = g.get_vertex('11')
