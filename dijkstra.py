@@ -1,5 +1,7 @@
 import sys
 
+test = 0
+
 class Vertex:
     def __init__(self, node):
         self.id = node
@@ -93,8 +95,10 @@ class Graph:
 
 def shortest(v, path):
     ''' make shortest path from v.previous'''
+    global test
     if v.previous:
         path.append(v.previous.get_id())
+        test += 1
         shortest(v.previous, path)
     return
 
@@ -150,6 +154,7 @@ def readFile():
     lines = f.readlines()
     f.close()
     g = Graph()
+    cost = 100000000  # base cost
 
     count = 0
     tempN = lines[0].split("\\s")
@@ -173,6 +178,51 @@ def readFile():
         g.add_edge(str(line[0]), str(line[1]), metric)
         linkLength.append(line[3])
         current += 1
+    return g
+
+def gINIT():
+    g = Graph()
+    for xx in xrange(1, 27):
+        g.add_vertex(str(xx))
+    g.add_edge('1', '2', (100000000/1500000))
+    g.add_edge('1', '5', (100000000/1500000))
+    g.add_edge('1', '6', (100000000/1500000))
+    g.add_edge('2', '3', (100000000/2000000))
+    g.add_edge('2', '7', (100000000/1500000))
+    g.add_edge('2', '11', (100000000/2000000))
+    g.add_edge('3', '4', (100000000/1500000))
+    g.add_edge('3', '8', (100000000/1500000))
+    g.add_edge('4', '9', (100000000/1000000))
+    g.add_edge('5', '10', (100000000/1500000))
+    g.add_edge('6', '10', (100000000/1500000))
+    g.add_edge('6', '11', (100000000/2000000))
+    g.add_edge('7', '8',  (100000000/1500000))
+    g.add_edge('7', '12', (100000000/2000000))
+    g.add_edge('8', '9',  (100000000/1500000))
+    g.add_edge('10', '11', (100000000/1500000))
+    g.add_edge('11', '12', (100000000/1500000))
+    g.add_edge('11', '13', (100000000/2000000))
+    g.add_edge('12', '14', (100000000/2000000))
+    g.add_edge('12', '18', (100000000/2000000))
+    g.add_edge('13', '15', (100000000/1500000))
+    g.add_edge('13', '17', (100000000/1500000))
+    g.add_edge('14', '22', (100000000/1500000))
+    g.add_edge('14', '24', (100000000/1500000))
+    g.add_edge('15', '16', (100000000/1000000))
+    g.add_edge('15', '18', (100000000/1000000))
+    g.add_edge('16', '18', (100000000/1000000))
+    g.add_edge('17', '18', (100000000/1500000))
+    g.add_edge('17', '19', (100000000/1000000))
+    g.add_edge('17', '21', (100000000/1500000))
+    g.add_edge('18', '21', (100000000/1000000))
+    g.add_edge('19', '20', (100000000/1000000))
+    g.add_edge('20', '22', (100000000/1500000))
+    g.add_edge('21', '22', (100000000/1500000))
+    g.add_edge('22', '23', (100000000/2200000))
+    g.add_edge('23', '25', (100000000/1700000))
+    g.add_edge('24', '25', (100000000/1500000))
+    g.add_edge('24', '26', (100000000/1000000))
+    g.add_edge('25', '26', (100000000/1000000))
     return g
 
 import time
@@ -205,7 +255,7 @@ if __name__ == '__main__':
     """
 
     for x in xrange(1, 27):
-        gtemp = readFile()
+        gtemp = gINIT()
         dijkstra(gtemp, gtemp.get_vertex(str(x)))
         for y in xrange(1, 27):
             target = gtemp.get_vertex(str(y))
