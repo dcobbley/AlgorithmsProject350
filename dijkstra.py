@@ -1,6 +1,7 @@
 import sys
 
 test = 0
+use = []
 
 class Vertex:
     def __init__(self, node):
@@ -98,9 +99,20 @@ def shortest(v, path):
     global test
     if v.previous:
         path.append(v.previous.get_id())
-        test += 1
+
         shortest(v.previous, path)
     return
+
+def delayLink():
+    Cij =1500000.0
+    Pij= 0.000005*145.0
+    Ti = 1500
+    Dpq = 0.9
+    delta = (1/((26*(26-1))*Dpq))
+    Fij = 1000000
+
+    dlink= (1/delta)*((Fij/(Cij - Fij)) + (Pij + Ti)(Fij/L))
+    return dlink
 
 import heapq
 
@@ -147,7 +159,7 @@ def dijkstra(aGraph, start):
         # 2. Put all vertices not visited into the queue
         unvisited_queue = [(v.get_distance(),v) for v in aGraph if not v.visited]
         heapq.heapify(unvisited_queue)
-    current.rset_visited()
+
 
 def readFile():
     f = open('USA.txt')
@@ -181,6 +193,7 @@ def readFile():
     return g
 
 def gINIT():
+    Matrix = [[0 for q in range(5)] for q in range(5)]
     g = Graph()
     for xx in xrange(1, 27):
         g.add_vertex(str(xx))
@@ -234,7 +247,7 @@ if __name__ == '__main__':
     propDelay = 0.000005  # prop delay
     dpq = 0.92  # average traffic
     cost = 100000000  # base cost
-    Cij = []
+    #Cij = []
 
     """
     Delay equation
@@ -261,7 +274,7 @@ if __name__ == '__main__':
             target = gtemp.get_vertex(str(y))
             path = [target.get_id()]
             shortest(target, path)
-            print 'The shortest path : %s' % (path[::-1])
+            print 'The shortest path : %s with cost of ' % (path[::-1])
 
     """
     target = g.get_vertex('11')
@@ -272,3 +285,7 @@ if __name__ == '__main__':
     print "Delta = " + str(delta)
     finish = time.time() - start
     print "Time taken: " + str(finish)
+    target = gtemp.get_vertex('1')
+    print delayLink()
+
+
