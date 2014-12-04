@@ -1,7 +1,7 @@
 import sys
 
 test = 0
-use = [38]
+use = []
 
 class Vertex:
     def __init__(self, node):
@@ -111,7 +111,7 @@ def delayLink():
     delta = (1/((26*(26-1))*Dpq))
     Fij = 1000000
 
-    dlink= (1/delta)*((Fij/(Cij - Fij)) + (Pij + Ti)(Fij/L))
+    dlink = (1/delta)*((Fij/(Cij - Fij)) + (Pij + Ti)(Fij/L))
     return dlink
 
 import heapq
@@ -242,85 +242,84 @@ def linkUsage(p):
     global use
     lengthOfP = int(len(p))
     o = 0
-    print "this is P 0" + p[0]
     while o < len(p)-1:
         if len(p) != 1:
-            print "o = " + p[0]
-            if (str(p[o]) == '1' and p[o+1] == '2') or (p[o] == '2' and p[o+1] == '1'):
+
+            if (p[o] == '1' and p[o+1] == '2') or (p[o] == '2' and p[o+1] == '1'):
                 use[0] += 1
-            elif (o == '1' and o+1 == '5') or (o == '5' and o+1 == '1'):
+            elif (p[o] == '1' and p[o+1] == '5') or (p[o] == '5' and p[o+1] == '1'):
                 use[1] += 1
-            elif (o == '1' and o+1 == '6') or (o == '6' and o+1 == '1'):
+            elif (p[o] == '1' and p[o+1] == '6') or (p[o] == '6' and p[o+1] == '1'):
                 use[2] += 1
-            elif (o == '2' and o+1 == '3') or (o == '3' and o+1 == '2'):
+            elif (p[o] == '2' and p[o+1] == '3') or (p[o] == '3' and p[o+1] == '2'):
                 use[3] += 1
-            elif (o == '2' and o+1 == '7') or (o == '7' and o+1 == '2'):
+            elif (p[o] == '2' and p[o+1] == '7') or (p[o] == '7' and p[o+1] == '2'):
                 use[4] += 1
-            elif (o == '2' and o+1 == '11') or (o == '11' and o+1 == '2'):
+            elif (p[o] == '2' and p[o+1] == '11') or (p[o] == '11' and p[o+1] == '2'):
                 use[5] += 1
-            elif (o == '3' and o+1 == '4') or (o == '4' and o+1 == '3'):
+            elif (p[o] == '3' and p[o+1] == '4') or (p[o] == '4' and p[o+1] == '3'):
                 use[6] += 1
-            elif (o == '3' and o+1 == '8') or (o == '8' and o+1 == '3'):
+            elif (p[o] == '3' and p[o+1] == '8') or (p[o] == '8' and p[o+1] == '3'):
                 use[7] += 1
-            elif (0 == '4' and o+1 == '9') or (o == '9' and o+1 == '4'):
+            elif (p[o] == '4' and p[o+1] == '9') or (p[o] == '9' and p[o+1] == '4'):
                 use[8] += 1
-            elif (0 == '5' and o+1 == '10') or (o == '10' and o+1 == '5'):
+            elif (p[o] == '5' and p[o+1] == '10') or (p[o] == '10' and p[o+1] == '5'):
                 use[9] += 1
-            elif (o == '6' and o+1 == '10') or (o == '10' and o+1 == '6'):
+            elif (p[o] == '6' and p[o+1] == '10') or (p[o] == '10' and p[o+1] == '6'):
                 use[10] += 1
-            elif (o == '6' and o+1 == '11') or (o == '11' and p[0+1] == '4'):
+            elif (p[o] == '6' and p[o+1] == '11') or (p[o] == '11' and p[o+1] == '4'):
                 use[11] += 1
-            elif (p[o] == '7' and p[0+1] == '8') or (p[o] == '8' and p[0+1] == '7'):
+            elif (p[o] == '7' and p[o+1] == '8') or (p[o] == '8' and p[o+1] == '7'):
                 use[12] += 1
-            elif (p[o] == '7' and p[0+1] == '12') or (p[o] == '12' and p[0+1] == '7'):
+            elif (p[o] == '7' and p[o+1] == '12') or (p[o] == '12' and p[o+1] == '7'):
                 use[13] += 1
-            elif (p[o] == '8' and p[0+1] == '9') or (p[o] == '9' and p[0+1] == '8'):
+            elif (p[o] == '8' and p[o+1] == '9') or (p[o] == '9' and p[o+1] == '8'):
                 use[14] += 1
-            elif (p[o] == '10' and p[0+1] == '11') or (p[o] == '4' and p[0+1] == '3'):
+            elif (p[o] == '10' and p[o+1] == '11') or (p[o] == '4' and p[o+1] == '3'):
                 use[15] += 1
-            elif (p[o] == '11' and p[0+1] == '12') or (p[o] == '12' and p[0+1] == '11'):
+            elif (p[o] == '11' and p[o+1] == '12') or (p[o] == '12' and p[o+1] == '11'):
                 use[16] += 1
-            elif (p[o] == '11' and p[0+1] == '13') or (p[o] == '13' and p[0+1] == '11'):
+            elif (p[o] == '11' and p[o+1] == '13') or (p[o] == '13' and p[o+1] == '11'):
                 use[17] += 1
-            elif (p[o] == '12' and p[0+1] == '14') or (p[o] == '14' and p[0+1] == '12'):
+            elif (p[o] == '12' and p[o+1] == '14') or (p[o] == '14' and p[o+1] == '12'):
                 use[18] += 1
-            elif (p[o] == '12' and p[0+1] == '18') or (p[o] == '18' and p[0+1] == '12'):
+            elif (p[o] == '12' and p[o+1] == '18') or (p[o] == '18' and p[o+1] == '12'):
                 use[19] += 1
-            elif (p[o] == '13' and p[0+1] == '15') or (p[o] == '15' and p[0+1] == '13'):
+            elif (p[o] == '13' and p[o+1] == '15') or (p[o] == '15' and p[o+1] == '13'):
                 use[20] += 1
-            elif (p[o] == '13' and p[0+1] == '17') or (p[o] == '17' and p[0+1] == '13'):
+            elif (p[o] == '13' and p[o+1] == '17') or (p[o] == '17' and p[o+1] == '13'):
                 use[21] += 1
-            elif (p[o] == '14' and p[0+1] == '22') or (p[o] == '14' and p[0+1] == '22'):
+            elif (p[o] == '14' and p[o+1] == '22') or (p[o] == '14' and p[o+1] == '22'):
                 use[22] += 1
-            elif (p[o] == '14' and p[0+1] == '24') or (p[o] == '24' and p[0+1] == '14'):
+            elif (p[o] == '14' and p[o+1] == '24') or (p[o] == '24' and p[o+1] == '14'):
                 use[23] += 1
-            elif (p[o] == '15' and p[0+1] == '16') or (p[o] == '16' and p[0+1] == '15'):
+            elif (p[o] == '15' and p[o+1] == '16') or (p[o] == '16' and p[o+1] == '15'):
                 use[24] += 1
-            elif (p[o] == '15' and p[0+1] == '18') or (p[o] == '18' and p[0+1] == '15'):
+            elif (p[o] == '15' and p[o+1] == '18') or (p[o] == '18' and p[o+1] == '15'):
                 use[25] += 1
-            elif (p[o] == '16' and p[0+1] == '18') or (p[o] == '18' and p[0+1] == '16'):
+            elif (p[o] == '16' and p[o+1] == '18') or (p[o] == '18' and p[o+1] == '16'):
                 use[26] += 1
-            elif (p[o] == '17' and p[0+1] == '18') or (p[o] == '18' and p[0+1] == '17'):
+            elif (p[o] == '17' and p[o+1] == '18') or (p[o] == '18' and p[o+1] == '17'):
                 use[27] += 1
-            elif (p[o] == '17' and p[0+1] == '21') or (p[o] == '21' and p[0+1] == '17'):
+            elif (p[o] == '17' and p[o+1] == '21') or (p[o] == '21' and p[o+1] == '17'):
                 use[28] += 1
-            elif (p[o] == '18' and p[0+1] == '21') or (p[o] == '21' and p[0+1] == '18'):
+            elif (p[o] == '18' and p[o+1] == '21') or (p[o] == '21' and p[o+1] == '18'):
                 use[29] += 1
-            elif (p[o] == '19' and p[0+1] == '20') or (p[o] == '20' and p[0+1] == '19'):
+            elif (p[o] == '19' and p[o+1] == '20') or (p[o] == '20' and p[o+1] == '19'):
                 use[30] += 1
-            elif (p[o] == '20' and p[0+1] == '22') or (p[o] == '22' and p[0+1] == '20'):
+            elif (p[o] == '20' and p[o+1] == '22') or (p[o] == '22' and p[o+1] == '20'):
                 use[31] += 1
-            elif (p[o] == '21' and p[0+1] == '22') or (p[o] == '22' and p[0+1] == '21'):
+            elif (p[o] == '21' and p[o+1] == '22') or (p[o] == '22' and p[o+1] == '21'):
                 use[32] += 1
-            elif (p[o] == '22' and p[0+1] == '23') or (p[o] == '23' and p[0+1] == '22'):
+            elif (p[o] == '22' and p[o+1] == '23') or (p[o] == '23' and p[o+1] == '22'):
                 use[33] += 1
-            elif (p[o] == '23' and p[0+1] == '25') or (p[o] == '25' and p[0+1] == '23'):
+            elif (p[o] == '23' and p[o+1] == '25') or (p[o] == '25' and p[o+1] == '23'):
                 use[34] += 1
-            elif (p[o] == '24' and p[0+1] == '25') or (p[o] == '25' and p[0+1] == '24'):
+            elif (p[o] == '24' and p[o+1] == '25') or (p[o] == '25' and p[o+1] == '24'):
                 use[35] += 1
-            elif (p[o] == '24' and p[0+1] == '26') or (p[o] == '26' and p[0+1] == '24'):
+            elif (p[o] == '24' and p[o+1] == '26') or (p[o] == '26' and p[o+1] == '24'):
                 use[36] += 1
-            elif (p[o] == '25' and p[0+1] == '26') or (p[o] == '26' and p[0+1] == '25'):
+            elif (p[o] == '25' and p[o+1] == '26') or (p[o] == '26' and p[o+1] == '25'):
                 use[37] += 1
         o += 1
 
@@ -328,7 +327,10 @@ import time
 
 if __name__ == '__main__':
     global use
-    use[0] = 0
+    uu = 0
+    while uu < 38:
+        use.append(0)
+        uu += 1
     start = time.time()
     L = 1500  # length of packet in bytes
     processDelay = 0.0001  # processing delay 1msec
@@ -374,7 +376,11 @@ if __name__ == '__main__':
     print "Delta = " + str(delta)
     finish = time.time() - start
     print "Time taken: " + str(finish)
-    target = gtemp.get_vertex('1')
+    fuck = 0
+    while fuck < 38:
+        print "Usage for link " + str(fuck) + ": " + str(use[fuck])
+        fuck += 1
+
 
 
 
