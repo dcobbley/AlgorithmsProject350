@@ -1,7 +1,7 @@
 import sys
 
 test = 0
-use = []
+use = [38]
 
 class Vertex:
     def __init__(self, node):
@@ -240,31 +240,35 @@ def gINIT():
 
 def linkUsage(p):
     global use
-    for o in len(p):
+    lengthOfP = int(len(p))
+    o = 0
+    print "this is P 0" + p[0]
+    while o < len(p)-1:
         if len(p) != 1:
-            if (p[o] == '1' and p[0+1] == '2') or (p[o] == '2' and p[0+1] == '1'):
+            print "o = " + p[0]
+            if (str(p[o]) == '1' and p[o+1] == '2') or (p[o] == '2' and p[o+1] == '1'):
                 use[0] += 1
-            elif (p[o] == '1' and p[0+1] == '5') or (p[o] == '5' and p[0+1] == '1'):
+            elif (o == '1' and o+1 == '5') or (o == '5' and o+1 == '1'):
                 use[1] += 1
-            elif (p[o] == '1' and p[0+1] == '6') or (p[o] == '6' and p[0+1] == '1'):
+            elif (o == '1' and o+1 == '6') or (o == '6' and o+1 == '1'):
                 use[2] += 1
-            elif (p[o] == '2' and p[0+1] == '3') or (p[o] == '3' and p[0+1] == '2'):
+            elif (o == '2' and o+1 == '3') or (o == '3' and o+1 == '2'):
                 use[3] += 1
-            elif (p[o] == '2' and p[0+1] == '7') or (p[o] == '7' and p[0+1] == '2'):
+            elif (o == '2' and o+1 == '7') or (o == '7' and o+1 == '2'):
                 use[4] += 1
-            elif (p[o] == '2' and p[0+1] == '11') or (p[o] == '11' and p[0+1] == '2'):
+            elif (o == '2' and o+1 == '11') or (o == '11' and o+1 == '2'):
                 use[5] += 1
-            elif (p[o] == '3' and p[0+1] == '4') or (p[o] == '4' and p[0+1] == '3'):
+            elif (o == '3' and o+1 == '4') or (o == '4' and o+1 == '3'):
                 use[6] += 1
-            elif (p[o] == '3' and p[0+1] == '8') or (p[o] == '8' and p[0+1] == '3'):
+            elif (o == '3' and o+1 == '8') or (o == '8' and o+1 == '3'):
                 use[7] += 1
-            elif (p[o] == '4' and p[0+1] == '9') or (p[o] == '9' and p[0+1] == '4'):
+            elif (0 == '4' and o+1 == '9') or (o == '9' and o+1 == '4'):
                 use[8] += 1
-            elif (p[o] == '5' and p[0+1] == '10') or (p[o] == '10' and p[0+1] == '5'):
+            elif (0 == '5' and o+1 == '10') or (o == '10' and o+1 == '5'):
                 use[9] += 1
-            elif (p[o] == '6' and p[0+1] == '10') or (p[o] == '10' and p[0+1] == '6'):
+            elif (o == '6' and o+1 == '10') or (o == '10' and o+1 == '6'):
                 use[10] += 1
-            elif (p[o] == '6' and p[0+1] == '11') or (p[o] == '11' and p[0+1] == '4'):
+            elif (o == '6' and o+1 == '11') or (o == '11' and p[0+1] == '4'):
                 use[11] += 1
             elif (p[o] == '7' and p[0+1] == '8') or (p[o] == '8' and p[0+1] == '7'):
                 use[12] += 1
@@ -318,13 +322,13 @@ def linkUsage(p):
                 use[36] += 1
             elif (p[o] == '25' and p[0+1] == '26') or (p[o] == '26' and p[0+1] == '25'):
                 use[37] += 1
+        o += 1
 
 import time
 
 if __name__ == '__main__':
     global use
-    for n in range(0, 38, 1):
-        use[n] = 0
+    use[0] = 0
     start = time.time()
     L = 1500  # length of packet in bytes
     processDelay = 0.0001  # processing delay 1msec
@@ -371,6 +375,6 @@ if __name__ == '__main__':
     finish = time.time() - start
     print "Time taken: " + str(finish)
     target = gtemp.get_vertex('1')
-    print path[::-1]
+
 
 
