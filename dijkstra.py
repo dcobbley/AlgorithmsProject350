@@ -112,20 +112,29 @@ def delayLink():
     global linkLength
 
 
-    Ti = 1500.0
-    Dpq = 0.5
+    Ti = 1500
+    Dpq = 0.78
     delta = (1/((26*(26-1))*Dpq))
     #Fij = 1000000
     counter = 0
     while counter < 38:
         Cij = float(linkCap[counter])
-        Fij = float(use[counter] * Dpq * (1500*8))
+        Fij = use[counter] * Dpq * (1500*8)
         Pij = float(linkLength[counter]) * 0.000005
-        dlink = (Fij / (Cij - Fij)) + (Pij + Ti)(Fij / L)
+        stdDiv = Fij/L
+        dlink = 1/((Fij / (Cij - Fij)) + ((Pij + Ti)*(Fij / L)))
         totalDelay += dlink
-        print "Link delay for link " + str(counter) + ": " + str(dlink) + "secs"
+        #print "Link delay for link " + str(counter) + ": " + str(dlink) + "secs"
+
+        if dlink > 0:
+            print "Link delay for link " + str(counter) + ": " + str(dlink) + "secs"
+        else:
+            print "Infinite Capcity"
+
+        if Cij <= Fij:
+            print "Link Capacity greater than flow for link"
         counter += 1
-    return dlink
+    #return dlink
 
 import heapq
 
@@ -379,6 +388,7 @@ if __name__ == '__main__':
     print "Time taken: " + str(finish)
     print "Total flows: " + str(countForPat)
     delayLink()
+    print "Total Delay in the network " + str(totalDelay)
 
 
 
