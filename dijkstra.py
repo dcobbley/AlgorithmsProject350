@@ -2,6 +2,10 @@ import sys
 
 test = 0
 use = []
+countForPat = 0
+totalDelay = 0
+linkLength = []
+linkCap = []
 
 class Vertex:
     def __init__(self, node):
@@ -104,14 +108,23 @@ def shortest(v, path):
     return
 
 def delayLink():
-    Cij =1500000.0
-    Pij= 0.000005*145.0
-    Ti = 1500
-    Dpq = 0.9
-    delta = (1/((26*(26-1))*Dpq))
-    Fij = 1000000
+    global totalDelay
+    global linkLength
 
-    dlink = (1/delta)*((Fij/(Cij - Fij)) + (Pij + Ti)(Fij/L))
+
+    Ti = 1500.0
+    Dpq = 0.5
+    delta = (1/((26*(26-1))*Dpq))
+    #Fij = 1000000
+    counter = 0
+    while counter < 38:
+        Cij = float(linkCap[counter])
+        Fij = float(use[counter] * Dpq * (1500*8))
+        Pij = float(linkLength[counter]) * 0.000005
+        dlink = (Fij / (Cij - Fij)) + (Pij + Ti)(Fij / L)
+        totalDelay += dlink
+        print "Link delay for link " + str(counter) + ": " + str(dlink) + "secs"
+        counter += 1
     return dlink
 
 import heapq
@@ -120,7 +133,7 @@ def dijkstra(aGraph, start):
     print '''Dijkstra's shortest path for node ''' + start.get_id()
     # Set the distance for the start node to zero
     start.set_distance(0)
-
+    cost = 100000000
 
     # Put tuple pair into the priority queue
     unvisited_queue = [(v.get_distance(),v) for v in aGraph]
@@ -140,7 +153,7 @@ def dijkstra(aGraph, start):
             if next.visited:
                 continue
 
-            new_dist = current.get_distance() + current.get_weight(next)
+            new_dist = current.get_distance() + (cost/current.get_weight(next))
 
             if new_dist < next.get_distance():
                 next.set_distance(new_dist)
@@ -162,89 +175,76 @@ def dijkstra(aGraph, start):
 
 
 def readFile():
+    global linkLength
+    global linkCap
     f = open('USA.txt')
     lines = f.readlines()
     f.close()
-    g = Graph()
-    cost = 100000000  # base cost
 
-    count = 0
-    tempN = lines[0].split("\\s")
-    tempN = " ".join(tempN[0].split())
-    tempN = tempN.split(" ")
-    N = int(tempN[0])
-
-    while count < N:
-        g.add_vertex(str(count))
-        count += 1
-
-    linkLength = []
-    M = len(lines)
     current = 1
     while current < len(lines):
         line = lines[current].split("\\s")
         line = " ".join(line[0].split())
         line = line.split(" ")
-        metric = cost/(float(line[2]))
-        #print "From " + line[0] + " To " + line[1] + " cost=" + str(costf) + " Delay " + line[3]
-        g.add_edge(str(line[0]), str(line[1]), metric)
+        linkCap.append(line[2])
         linkLength.append(line[3])
         current += 1
-    return g
+
 
 def gINIT():
     Matrix = [[0 for q in range(5)] for q in range(5)]
     g = Graph()
     for xx in xrange(1, 27):
         g.add_vertex(str(xx))
-    g.add_edge('1', '2', (100000000/1500000))
-    g.add_edge('1', '5', (100000000/1500000))
-    g.add_edge('1', '6', (100000000/1500000))
-    g.add_edge('2', '3', (100000000/2000000))
-    g.add_edge('2', '7', (100000000/1500000))
-    g.add_edge('2', '11', (100000000/2000000))
-    g.add_edge('3', '4', (100000000/1500000))
-    g.add_edge('3', '8', (100000000/1500000))
-    g.add_edge('4', '9', (100000000/1000000))
-    g.add_edge('5', '10', (100000000/1500000))
-    g.add_edge('6', '10', (100000000/1500000))
-    g.add_edge('6', '11', (100000000/2000000))
-    g.add_edge('7', '8',  (100000000/1500000))
-    g.add_edge('7', '12', (100000000/2000000))
-    g.add_edge('8', '9',  (100000000/1500000))
-    g.add_edge('10', '11', (100000000/1500000))
-    g.add_edge('11', '12', (100000000/1500000))
-    g.add_edge('11', '13', (100000000/2000000))
-    g.add_edge('12', '14', (100000000/2000000))
-    g.add_edge('12', '18', (100000000/2000000))
-    g.add_edge('13', '15', (100000000/1500000))
-    g.add_edge('13', '17', (100000000/1500000))
-    g.add_edge('14', '22', (100000000/1500000))
-    g.add_edge('14', '24', (100000000/1500000))
-    g.add_edge('15', '16', (100000000/1000000))
-    g.add_edge('15', '18', (100000000/1000000))
-    g.add_edge('16', '18', (100000000/1000000))
-    g.add_edge('17', '18', (100000000/1500000))
-    g.add_edge('17', '19', (100000000/1000000))
-    g.add_edge('17', '21', (100000000/1500000))
-    g.add_edge('18', '21', (100000000/1000000))
-    g.add_edge('19', '20', (100000000/1000000))
-    g.add_edge('20', '22', (100000000/1500000))
-    g.add_edge('21', '22', (100000000/1500000))
-    g.add_edge('22', '23', (100000000/2200000))
-    g.add_edge('23', '25', (100000000/1700000))
-    g.add_edge('24', '25', (100000000/1500000))
-    g.add_edge('24', '26', (100000000/1000000))
-    g.add_edge('25', '26', (100000000/1000000))
+    g.add_edge('1', '2', 1500000)
+    g.add_edge('1', '5', 1500000)
+    g.add_edge('1', '6', 1500000)
+    g.add_edge('2', '3', 2000000)
+    g.add_edge('2', '7', 1500000)
+    g.add_edge('2', '11', 2000000)
+    g.add_edge('3', '4', 1500000)
+    g.add_edge('3', '8', 1500000)
+    g.add_edge('4', '9', 1000000)
+    g.add_edge('5', '10', 1500000)
+    g.add_edge('6', '10', 1500000)
+    g.add_edge('6', '11', 2000000)
+    g.add_edge('7', '8',  1500000)
+    g.add_edge('7', '12', 2000000)
+    g.add_edge('8', '9',  1500000)
+    g.add_edge('10', '11', 1500000)
+    g.add_edge('11', '12', 1500000)
+    g.add_edge('11', '13', 2000000)
+    g.add_edge('12', '14', 2000000)
+    g.add_edge('12', '18', 2000000)
+    g.add_edge('13', '15', 1500000)
+    g.add_edge('13', '17', 1500000)
+    g.add_edge('14', '22', 1500000)
+    g.add_edge('14', '24', 1500000)
+    g.add_edge('15', '16', 1000000)
+    g.add_edge('15', '18', 1000000)
+    g.add_edge('16', '18', 1000000)
+    g.add_edge('17', '18', 1500000)
+    g.add_edge('17', '19', 1000000)
+    g.add_edge('17', '21', 1500000)
+    g.add_edge('18', '21', 1000000)
+    g.add_edge('19', '20', 1000000)
+    g.add_edge('20', '22', 1500000)
+    g.add_edge('21', '22', 1500000)
+    g.add_edge('22', '23', 2200000)
+    g.add_edge('23', '25', 1700000)
+    g.add_edge('24', '25', 1500000)
+    g.add_edge('24', '26', 1000000)
+    g.add_edge('25', '26', 1000000)
     return g
 
 def linkUsage(p):
     global use
+    global countForPat
     lengthOfP = int(len(p))
     o = 0
     while o < len(p)-1:
         if len(p) != 1:
-
+            countForPat += 1
             if (p[o] == '1' and p[o+1] == '2') or (p[o] == '2' and p[o+1] == '1'):
                 use[0] += 1
             elif (p[o] == '1' and p[o+1] == '5') or (p[o] == '5' and p[o+1] == '1'):
@@ -331,6 +331,7 @@ if __name__ == '__main__':
     while uu < 38:
         use.append(0)
         uu += 1
+    readFile()
     start = time.time()
     L = 1500  # length of packet in bytes
     processDelay = 0.0001  # processing delay 1msec
@@ -376,10 +377,9 @@ if __name__ == '__main__':
     print "Delta = " + str(delta)
     finish = time.time() - start
     print "Time taken: " + str(finish)
-    fuck = 0
-    while fuck < 38:
-        print "Usage for link " + str(fuck) + ": " + str(use[fuck])
-        fuck += 1
+    print "Total flows: " + str(countForPat)
+    delayLink()
+
 
 
 
