@@ -6,6 +6,7 @@ countForPat = 0
 totalDelay = 0
 linkLength = []
 linkCap = []
+costToTarget = 0
 
 class Vertex:
     def __init__(self, node):
@@ -101,11 +102,12 @@ class Graph:
 def shortest(v, path):
     ''' make shortest path from v.previous'''
     global test
+    global costToTarget
     if v.previous:
         path.append(v.previous.get_id())
-
         shortest(v.previous, path)
     return
+
 
 def delayLink():
     global totalDelay
@@ -181,6 +183,7 @@ def dijkstra(aGraph, start):
         # 2. Put all vertices not visited into the queue
         unvisited_queue = [(v.get_distance(),v) for v in aGraph if not v.visited]
         heapq.heapify(unvisited_queue)
+    return next.get_distance()
 
 
 def readFile():
@@ -366,16 +369,16 @@ if __name__ == '__main__':
             wid = w.get_id()
             print '( %s , %s, %3d)'  % ( vid, wid, v.get_weight(w))
     """
-
+    temp = 0
     for x in xrange(1, 27):
         gtemp = gINIT()
-        dijkstra(gtemp, gtemp.get_vertex(str(x)))
+        temp = dijkstra(gtemp, gtemp.get_vertex(str(x)))
         for y in xrange(1, 27):
             target = gtemp.get_vertex(str(y))
             path = [target.get_id()]
             shortest(target, path)
             linkUsage(path)
-            print 'The shortest path : %s with cost of ' % (path[::-1])
+            print 'The shortest path : %s with cost of %s' % (path[::-1], temp)
 
     """
     target = g.get_vertex('11')
