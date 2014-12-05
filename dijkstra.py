@@ -6,7 +6,6 @@ countForPat = 0
 totalDelay = 0
 linkLength = []
 linkCap = []
-costToTarget = 0
 
 class Vertex:
     def __init__(self, node):
@@ -102,41 +101,32 @@ class Graph:
 def shortest(v, path):
     ''' make shortest path from v.previous'''
     global test
-    global costToTarget
     if v.previous:
         path.append(v.previous.get_id())
+
         shortest(v.previous, path)
     return
-
 
 def delayLink():
     global totalDelay
     global linkLength
 
 
-    Ti = 1500
-    Dpq = 0.78
+    Ti = 1500.0
+    Dpq = 0.5
     delta = (1/((26*(26-1))*Dpq))
     #Fij = 1000000
     counter = 0
     while counter < 38:
         Cij = float(linkCap[counter])
-        Fij = use[counter] * Dpq * (1500*8)
+        Fij = float(use[counter] * Dpq * (1500*8))
         Pij = float(linkLength[counter]) * 0.000005
-        stdDiv = Fij/L
-        dlink = 1/((Fij / (Cij - Fij)) + ((Pij + Ti)*(Fij / L)))
+        dlink = (Fij / (Cij - Fij)) + (Pij + Ti)*(Fij / L)
         totalDelay += dlink
-        #print "Link delay for link " + str(counter) + ": " + str(dlink) + "secs"
-
-        if dlink > 0:
-            print "Link delay for link " + str(counter) + ": " + str(dlink) + "secs"
-        else:
-            print "Infinite Capcity"
-
-        if Cij <= Fij:
-            print "Link Capacity greater than flow for link"
+        print "Link delay for link " + str(counter) + ": " + str(dlink) + "secs"
         counter += 1
-    #return dlink
+        print "Flow "+ str(Fij)
+
 
 import heapq
 
@@ -183,13 +173,12 @@ def dijkstra(aGraph, start):
         # 2. Put all vertices not visited into the queue
         unvisited_queue = [(v.get_distance(),v) for v in aGraph if not v.visited]
         heapq.heapify(unvisited_queue)
-    return next.get_distance()
 
 
 def readFile():
     global linkLength
     global linkCap
-    f = open('USA.txt')
+    f = open('test.txt')
     lines = f.readlines()
     f.close()
 
@@ -369,16 +358,16 @@ if __name__ == '__main__':
             wid = w.get_id()
             print '( %s , %s, %3d)'  % ( vid, wid, v.get_weight(w))
     """
-    temp = 0
+
     for x in xrange(1, 27):
         gtemp = gINIT()
-        temp = dijkstra(gtemp, gtemp.get_vertex(str(x)))
+        dijkstra(gtemp, gtemp.get_vertex(str(x)))
         for y in xrange(1, 27):
             target = gtemp.get_vertex(str(y))
             path = [target.get_id()]
             shortest(target, path)
             linkUsage(path)
-            print 'The shortest path : %s with cost of %s' % (path[::-1], temp)
+            print 'The shortest path : %s with cost of ' % (path[::-1])
 
     """
     target = g.get_vertex('11')
@@ -391,9 +380,3 @@ if __name__ == '__main__':
     print "Time taken: " + str(finish)
     print "Total flows: " + str(countForPat)
     delayLink()
-    print "Total Delay in the network " + str(totalDelay)
-
-
-
-
-
