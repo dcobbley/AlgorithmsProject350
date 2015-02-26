@@ -8,7 +8,7 @@
 \usetikzlibrary{automata,positioning}
 \newcommand{\encode}[1]{\langle #1 \rangle}
   
-\title{CS 350 Algorithms Project}
+\title{Comparison of Dijkstra's and Bellman-Ford \\ CS 350 Algorithms Project}
 \author{Katie Abrahams, David Cobbley, Andrew Qin}
 \date{March 12 2015}
 
@@ -18,10 +18,48 @@
 
 \section{Introduction}
 
-\section{Background info}
+We compared the Bellman-Ford and Dijkstra's shortest path algorithm on difference sets of data and compared several sets of metrics to see which algorithm is more efficient.
 
+\section{Background info}
+The Dijkstra's algorithm we are using has a time complexity of $O((|V|+|E|)+log|V|)$.
+
+Correctness:
+Completeness:
+
+Psuedocode:
+\begin{verbatim}
+
+\end{verbatim}
+
+Our Bellman-Ford algorithm has a time complexity of $O(|V||E|)$.
+
+Correctness:
+Completeness:
+
+Psuedocode:
+\begin{verbatim}
+
+\end{verbatim}
 \section{Testing Procedure}
 
 \section{Analysis}
 
+\section{Sources}
+
+We used this source code for our Bellman-Ford:
+\begin{verbatim}
+https://github.com/mneedham/algorithms2/tree/master/shortestpath
+\end{verbatim}
+
+
+\begin{verbatim}
+http://www.ijstr.org/final-print/june2013/A-Review-And-Evaluations-Of-Shortest-Path-Algorithms.pdf
+
+http://www.sciencedirect.com.proxy.lib.pdx.edu/science/article/pii/S0304397502006138#
+
+http://www.sciencedirect.com.proxy.lib.pdx.edu/science/article/pii/S0196677403000464
+
+ACM
+http://dl.acm.org.proxy.lib.pdx.edu/dl.cfm
+\end{verbatim}
 \end{document}
