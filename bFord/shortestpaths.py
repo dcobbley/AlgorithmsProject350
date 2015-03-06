@@ -16,7 +16,11 @@ vertices, edges = map(lambda x: int(x), file.readline().replace("\n", "").split(
 adjacency_list = [[] for k in xrange(vertices)]
 for line in file.readlines():
     tail, head, weight = line.split(" ")
-    adjacency_list[int(head)-1].append({"from" : int(tail), "weight" : int(weight)})
+    if int(weight) < 0:
+        weightTempInt = int(weight) * -1
+    else:
+	weightTempInt = int(weight)
+    adjacency_list[int(head)-1].append({"from" : int(tail), "weight" : weightTempInt})
 
 s=0
 cache = [[] for j in xrange(vertices+1)]
