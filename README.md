@@ -1,3 +1,0 @@
-Dijkstra
-========
-Dijkstra's Algorithm 
