@@ -63,13 +63,13 @@ class Graph:
     def __str__(self):
         return str([x.index for x in self.NodesList.values()])
 
-'''
-def wrapper(adjacency_list)
-    for adjacent in adjacency_list:
+
+#def wrapper(adjacency_list):
+#   for adjacent in adjacency_list:
         #first give adjacent to dijkstra
-    for tail in dictionary:
-	#get the tail pass to Dijkstra
-'''
+#    for tail in dictionary:
+#	#get the tail pass to Dijkstra
+
 
 def Dijkstra(Graph, startIndex):
     shPath = {}
@@ -123,7 +123,7 @@ body of the code starts here
 '''
 
 #file io
-file = open(os.path.dirname(os.path.realpath(__file__)) + "/g_small3.txt")
+file = open(os.path.dirname(os.path.realpath(__file__)) + "/g_medium.txt")
 vertices, edges = map(lambda x: int(x), file.readline().replace("\n", "").split(" "))
 
 #instance of the class object
@@ -141,7 +141,7 @@ for line in file.readlines():
     else:
 	weightTempInt = int(weight)
     adjacency_list[int(head)-1].append({"from" : int(tail), "weight" : weightTempInt})
-    g.addEdge(head,tail,weight)
+    g.addEdge(int(head),int(tail),int(weight))
 
 '''
 Start of the Bellman Ford
@@ -167,11 +167,12 @@ for v in range(0, vertices):
 if(not cache == previous_cache):
     raise Exception("negative cycle detected")
 
+cache[0] = float("inf")
 shortest_path = min(cache)
 print("Shortest Path: " + str(shortest_path))
-
 '''
 Start of the Dijkstra
 '''
 print "Dijkstra algorithm starting from node ", startindex, " ......"
+#print g
 Dijkstra(g,startindex)
