@@ -17,14 +17,17 @@
 \maketitle
 
 \section{Introduction}
-
-We compared the Bellman-Ford and Dijkstra's shortest path algorithm on difference sets of data and compared several sets of metrics to see which algorithm is more efficient.
+For our algorithm comparison and testing, we chose to compare two shortest-path algorithms.  After examining different algorithms that found shortest path between nodes of a graph, we chose Bellman-Ford and Dijkstra's algorithms.
+We compared the Bellman-Ford and Dijkstra's shortest path algorithm on sets of data and compared several sets of metrics to see which algorithm is more efficient.
 
 \section{Background info}
-The Dijkstra's algorithm we are using has a time complexity of $O((|V|+|E|)+log|V|)$.
+The Dijkstra's algorithm we selected has a time complexity of $O((|V|+|E|)+log|V|)$.
 
-Correctness:
+Correctness: 
+
 Completeness:
+
+Based on the proof seen in Cormen, et al, and our adaptations for the code.
 
 Psuedocode:
 \begin{verbatim}
@@ -34,14 +37,19 @@ Psuedocode:
 Our Bellman-Ford algorithm has a time complexity of $O(|V||E|)$.
 
 Correctness:
+
 Completeness:
+
+Based on the proof seen in Cormen, et al.
 
 Psuedocode:
 \begin{verbatim}
 
 \end{verbatim}
 \section{Testing Procedure}
-We modified code for Dijktra's and Bellman-Ford algorithms found online (listed in the Sources section), and ran tests to compare the time complexity of each algorithm with controlled data sets.  We also controlled for differences in operating system efficiency; we chose Linux as our testing platform.  In the course of testing, we also used Python metrics tools (cProfile and time).
+We modified code for Dijktra's and Bellman-Ford algorithms found online (listed in the Sources section), and ran tests to compare the time complexity of each algorithm with controlled data sets.  We also controlled for differences in operating system efficiency; we chose Linux as our testing platform.  In the course of testing, we also used Python metrics tools (cProfile and time).  Once we located the source code we chose to modify, we first ran preliminary tests for correctness and rough time estimates.  Both the Python time and cProfile tools were run from the command line, to verify program correctness and completeness at the most basic level.  Once the raw source code passed these tests, we could modify the code.
+To modify the code, we changed the data reading functionality to read in large data sets (>100,000 nodes at a base level).  We needed a large data set to make a meaningful time comparison.
+ We also modified the code to read in data sets in the same way, so that our tests would not be affected by differences in data processing.
 \section{Analysis}
 
 \section{Sources}
@@ -61,5 +69,8 @@ http://www.sciencedirect.com.proxy.lib.pdx.edu/science/article/pii/S019667740300
 
 ACM
 http://dl.acm.org.proxy.lib.pdx.edu/dl.cfm
+
+Thomas H. Cormen, Clifford Stein, Ronald L. Rivest, and Charles E. Leiserson.
+2001. Introduction to Algorithms (2nd ed.). McGraw-Hill Higher Education. 
 \end{verbatim}
 \end{document}
