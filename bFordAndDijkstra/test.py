@@ -70,8 +70,9 @@ class Graph:
 #    for tail in dictionary:
 #	#get the tail pass to Dijkstra
 
-
+myCounter= 0
 def Dijkstra(Graph, startIndex):
+    global myCounter
     shPath = {}
     for x in Graph.NodesList.keys():
         shPath[x] = float('Inf')
@@ -80,8 +81,9 @@ def Dijkstra(Graph, startIndex):
     doneNodes = [startIndex]
 
     num = Graph.numNodes - 1
-
+    
     while (num !=0) :
+	myCounter += 1
         #print "-- loop: ", num
         num = num - 1
         possiblePaths = {}
@@ -98,6 +100,7 @@ def Dijkstra(Graph, startIndex):
         doneNodes.append(nextNodeIndex)
 
     #print "shortest paths: ", shPath
+    print "My counters: ", myCounter
 
 '''
 ============================================================================
@@ -123,7 +126,7 @@ body of the code starts here
 '''
 
 #file io
-file = open(os.path.dirname(os.path.realpath(__file__)) + "/large.txt")
+file = open(os.path.dirname(os.path.realpath(__file__)) + "/g_medium.txt")
 vertices, edges = map(lambda x: int(x), file.readline().replace("\n", "").split(" "))
 
 #instance of the class object

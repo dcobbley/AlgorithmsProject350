@@ -1,0 +1,62 @@
+Shortest Path: 0
+         2403900200 function calls (2003860200 primitive calls) in 8943.852 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000 8943.852 8943.852 <string>:1(<module>)
+        2    0.000    0.000    0.003    0.001 PyShell.py:1347(write)
+400000000 8079.797    0.000 8079.797    0.000 bFord.py:12(calculate_least_adjacent_cost)
+        1  311.783  311.783 8943.852 8943.852 bFord.py:49(Start)
+400040000/20000  219.911    0.000  483.127    0.024 copy.py:145(deepcopy)
+   700000    0.077    0.000    0.077    0.000 copy.py:198(_deepcopy_atomic)
+40000/20000  181.111    0.005  483.041    0.024 copy.py:226(_deepcopy_list)
+   740000    0.562    0.000    0.697    0.000 copy.py:267(_keep_alive)
+       21    0.000    0.000    0.000    0.000 rpc.py:149(debug)
+        3    0.000    0.000    0.003    0.001 rpc.py:208(remotecall)
+        3    0.000    0.000    0.000    0.000 rpc.py:218(asynccall)
+        3    0.000    0.000    0.003    0.001 rpc.py:238(asyncreturn)
+        3    0.000    0.000    0.000    0.000 rpc.py:244(decoderesponse)
+        3    0.000    0.000    0.003    0.001 rpc.py:279(getresponse)
+        3    0.000    0.000    0.000    0.000 rpc.py:287(_proxify)
+        3    0.000    0.000    0.003    0.001 rpc.py:295(_getresponse)
+        3    0.000    0.000    0.000    0.000 rpc.py:317(newseq)
+        3    0.000    0.000    0.000    0.000 rpc.py:321(putmessage)
+        2    0.000    0.000    0.001    0.001 rpc.py:546(__getattr__)
+        1    0.000    0.000    0.001    0.001 rpc.py:564(__getmethods)
+        2    0.000    0.000    0.000    0.000 rpc.py:589(__init__)
+        2    0.000    0.000    0.002    0.001 rpc.py:594(__call__)
+        3    0.000    0.000    0.000    0.000 socket.py:223(meth)
+        3    0.000    0.000    0.000    0.000 threading.py:114(RLock)
+        6    0.000    0.000    0.000    0.000 threading.py:1152(currentThread)
+        3    0.000    0.000    0.000    0.000 threading.py:132(__init__)
+        3    0.000    0.000    0.000    0.000 threading.py:147(acquire)
+        3    0.000    0.000    0.000    0.000 threading.py:187(release)
+        3    0.000    0.000    0.000    0.000 threading.py:220(_acquire_restore)
+        3    0.000    0.000    0.000    0.000 threading.py:228(_release_save)
+        3    0.000    0.000    0.000    0.000 threading.py:238(_is_owned)
+        3    0.000    0.000    0.000    0.000 threading.py:242(Condition)
+        3    0.000    0.000    0.000    0.000 threading.py:260(__init__)
+        3    0.000    0.000    0.002    0.001 threading.py:309(wait)
+        6    0.000    0.000    0.000    0.000 threading.py:59(__init__)
+       15    0.000    0.000    0.000    0.000 threading.py:64(_note)
+        3    0.000    0.000    0.000    0.000 {_struct.pack}
+        3    0.000    0.000    0.000    0.000 {cPickle.dumps}
+        3    0.000    0.000    0.000    0.000 {getattr}
+400840000   20.578    0.000   20.578    0.000 {id}
+        6    0.000    0.000    0.000    0.000 {isinstance}
+        9    0.000    0.000    0.000    0.000 {len}
+       12    0.002    0.000    0.002    0.000 {method 'acquire' of 'thread.lock' objects}
+400740003   22.851    0.000   22.851    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        3    0.000    0.000    0.000    0.000 {method 'fileno' of '_socket.socket' objects}
+400780002   38.037    0.000   38.037    0.000 {method 'get' of 'dict' objects}
+        6    0.000    0.000    0.000    0.000 {method 'release' of 'thread.lock' objects}
+        3    0.000    0.000    0.000    0.000 {method 'send' of '_socket.socket' objects}
+400000001   67.254    0.000   67.254    0.000 {min}
+    20002    1.888    0.000    1.888    0.000 {range}
+        3    0.000    0.000    0.000    0.000 {select.select}
+        6    0.000    0.000    0.000    0.000 {thread.allocate_lock}
+       15    0.000    0.000    0.000    0.000 {thread.get_ident}
+
+

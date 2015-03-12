@@ -1,0 +1,4 @@
+#!/bin/bash
+python -m cProfile -o results.txt test.py
+python interpretResults.py > out.txt
+

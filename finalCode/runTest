@@ -1,0 +1,5 @@
+#!/bin/bash
+python -m cProfile -o dijresults.txt dijkstra.py
+python -m cProfile -o bfordresults.txt bFord.py
+python interpretResults.py > out.txt
+

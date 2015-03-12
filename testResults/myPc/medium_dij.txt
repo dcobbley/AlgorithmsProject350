@@ -1,0 +1,161 @@
+206328 function calls in 1.711 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    1.711    1.711 <string>:1(<module>)
+        4    0.000    0.000    0.015    0.004 PyShell.py:1347(write)
+        1    0.050    0.050    1.711    1.711 dijkstra.py:108(Start)
+        2    0.000    0.000    0.000    0.000 dijkstra.py:111(<lambda>)
+      200    0.000    0.000    0.000    0.000 dijkstra.py:13(__init__)
+     3734    0.023    0.000    0.023    0.000 dijkstra.py:20(addAdjacentNode)
+        1    0.000    0.000    0.000    0.000 dijkstra.py:33(__init__)
+      200    0.001    0.000    0.001    0.000 dijkstra.py:37(addNode)
+     3734    0.006    0.000    0.030    0.000 dijkstra.py:49(addEdge)
+        1    0.535    0.535    1.628    1.628 dijkstra.py:75(Dijkstra)
+   136267    0.682    0.000    0.682    0.000 dijkstra.py:90(<genexpr>)
+        1    0.000    0.000    0.000    0.000 ntpath.py:173(split)
+        1    0.000    0.000    0.000    0.000 ntpath.py:212(dirname)
+        1    0.000    0.000    0.000    0.000 ntpath.py:414(normpath)
+        1    0.000    0.000    0.000    0.000 ntpath.py:482(abspath)
+        2    0.000    0.000    0.000    0.000 ntpath.py:95(splitdrive)
+       35    0.000    0.000    0.000    0.000 rpc.py:149(debug)
+        5    0.000    0.000    0.015    0.003 rpc.py:208(remotecall)
+        5    0.000    0.000    0.000    0.000 rpc.py:218(asynccall)
+        5    0.000    0.000    0.014    0.003 rpc.py:238(asyncreturn)
+        5    0.000    0.000    0.000    0.000 rpc.py:244(decoderesponse)
+        5    0.000    0.000    0.014    0.003 rpc.py:279(getresponse)
+        5    0.000    0.000    0.000    0.000 rpc.py:287(_proxify)
+        5    0.000    0.000    0.014    0.003 rpc.py:295(_getresponse)
+        5    0.000    0.000    0.000    0.000 rpc.py:317(newseq)
+        5    0.000    0.000    0.000    0.000 rpc.py:321(putmessage)
+        4    0.000    0.000    0.001    0.000 rpc.py:546(__getattr__)
+        1    0.000    0.000    0.001    0.001 rpc.py:564(__getmethods)
+        4    0.000    0.000    0.000    0.000 rpc.py:589(__init__)
+        4    0.000    0.000    0.014    0.003 rpc.py:594(__call__)
+        5    0.000    0.000    0.000    0.000 socket.py:223(meth)
+        5    0.000    0.000    0.000    0.000 threading.py:114(RLock)
+       10    0.000    0.000    0.000    0.000 threading.py:1152(currentThread)
+        5    0.000    0.000    0.000    0.000 threading.py:132(__init__)
+        5    0.000    0.000    0.000    0.000 threading.py:147(acquire)
+        5    0.000    0.000    0.000    0.000 threading.py:187(release)
+        5    0.000    0.000    0.000    0.000 threading.py:220(_acquire_restore)
+        5    0.000    0.000    0.000    0.000 threading.py:228(_release_save)
+        5    0.000    0.000    0.000    0.000 threading.py:238(_is_owned)
+        5    0.000    0.000    0.000    0.000 threading.py:242(Condition)
+        5    0.000    0.000    0.000    0.000 threading.py:260(__init__)
+        5    0.000    0.000    0.014    0.003 threading.py:309(wait)
+       10    0.000    0.000    0.000    0.000 threading.py:59(__init__)
+       25    0.000    0.000    0.000    0.000 threading.py:64(_note)
+        5    0.000    0.000    0.000    0.000 {_struct.pack}
+        5    0.000    0.000    0.000    0.000 {cPickle.dumps}
+        5    0.000    0.000    0.000    0.000 {getattr}
+       11    0.000    0.000    0.000    0.000 {isinstance}
+    19924    0.002    0.000    0.002    0.000 {len}
+        1    0.000    0.000    0.000    0.000 {map}
+       20    0.014    0.001    0.014    0.001 {method 'acquire' of 'thread.lock' objects}
+      204    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        5    0.000    0.000    0.000    0.000 {method 'fileno' of '_socket.socket' objects}
+        4    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
+    19900    0.002    0.000    0.002    0.000 {method 'iteritems' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 {method 'join' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {method 'keys' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 {method 'lstrip' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {method 'readline' of 'file' objects}
+        1    0.001    0.001    0.001    0.001 {method 'readlines' of 'file' objects}
+       10    0.000    0.000    0.000    0.000 {method 'release' of 'thread.lock' objects}
+        4    0.000    0.000    0.000    0.000 {method 'replace' of 'str' objects}
+        5    0.000    0.000    0.000    0.000 {method 'send' of '_socket.socket' objects}
+     3736    0.003    0.000    0.003    0.000 {method 'split' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 {method 'startswith' of 'str' objects}
+    18095    0.392    0.000    0.392    0.000 {min}
+        1    0.000    0.000    0.000    0.000 {nt._getfullpathname}
+        1    0.000    0.000    0.000    0.000 {open}
+        5    0.000    0.000    0.000    0.000 {select.select}
+       10    0.000    0.000    0.000    0.000 {thread.allocate_lock}
+       25    0.000    0.000    0.000    0.000 {thread.get_ident}
+
+
+ONE MORE TIME
+
+
+206328 function calls in 1.821 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    1.821    1.821 <string>:1(<module>)
+        4    0.000    0.000    0.072    0.018 PyShell.py:1347(write)
+        1    0.057    0.057    1.821    1.821 dijkstra.py:108(Start)
+        2    0.000    0.000    0.000    0.000 dijkstra.py:111(<lambda>)
+      200    0.000    0.000    0.000    0.000 dijkstra.py:13(__init__)
+     3734    0.027    0.000    0.027    0.000 dijkstra.py:20(addAdjacentNode)
+        1    0.000    0.000    0.000    0.000 dijkstra.py:33(__init__)
+      200    0.001    0.000    0.001    0.000 dijkstra.py:37(addNode)
+     3734    0.007    0.000    0.034    0.000 dijkstra.py:49(addEdge)
+        1    0.553    0.553    1.725    1.725 dijkstra.py:75(Dijkstra)
+   136267    0.688    0.000    0.688    0.000 dijkstra.py:90(<genexpr>)
+        1    0.000    0.000    0.000    0.000 ntpath.py:173(split)
+        1    0.000    0.000    0.000    0.000 ntpath.py:212(dirname)
+        1    0.000    0.000    0.000    0.000 ntpath.py:414(normpath)
+        1    0.000    0.000    0.000    0.000 ntpath.py:482(abspath)
+        2    0.000    0.000    0.000    0.000 ntpath.py:95(splitdrive)
+       35    0.000    0.000    0.000    0.000 rpc.py:149(debug)
+        5    0.000    0.000    0.072    0.014 rpc.py:208(remotecall)
+        5    0.000    0.000    0.000    0.000 rpc.py:218(asynccall)
+        5    0.000    0.000    0.072    0.014 rpc.py:238(asyncreturn)
+        5    0.000    0.000    0.000    0.000 rpc.py:244(decoderesponse)
+        5    0.000    0.000    0.072    0.014 rpc.py:279(getresponse)
+        5    0.000    0.000    0.000    0.000 rpc.py:287(_proxify)
+        5    0.000    0.000    0.071    0.014 rpc.py:295(_getresponse)
+        5    0.000    0.000    0.000    0.000 rpc.py:317(newseq)
+        5    0.000    0.000    0.000    0.000 rpc.py:321(putmessage)
+        4    0.000    0.000    0.058    0.015 rpc.py:546(__getattr__)
+        1    0.000    0.000    0.058    0.058 rpc.py:564(__getmethods)
+        4    0.000    0.000    0.000    0.000 rpc.py:589(__init__)
+        4    0.000    0.000    0.014    0.003 rpc.py:594(__call__)
+        5    0.000    0.000    0.000    0.000 socket.py:223(meth)
+        5    0.000    0.000    0.000    0.000 threading.py:114(RLock)
+       10    0.000    0.000    0.000    0.000 threading.py:1152(currentThread)
+        5    0.000    0.000    0.000    0.000 threading.py:132(__init__)
+        5    0.000    0.000    0.000    0.000 threading.py:147(acquire)
+        5    0.000    0.000    0.000    0.000 threading.py:187(release)
+        5    0.000    0.000    0.000    0.000 threading.py:220(_acquire_restore)
+        5    0.000    0.000    0.000    0.000 threading.py:228(_release_save)
+        5    0.000    0.000    0.000    0.000 threading.py:238(_is_owned)
+        5    0.000    0.000    0.000    0.000 threading.py:242(Condition)
+        5    0.000    0.000    0.000    0.000 threading.py:260(__init__)
+        5    0.000    0.000    0.071    0.014 threading.py:309(wait)
+       10    0.000    0.000    0.000    0.000 threading.py:59(__init__)
+       25    0.000    0.000    0.000    0.000 threading.py:64(_note)
+        5    0.000    0.000    0.000    0.000 {_struct.pack}
+        5    0.000    0.000    0.000    0.000 {cPickle.dumps}
+        5    0.000    0.000    0.000    0.000 {getattr}
+       11    0.000    0.000    0.000    0.000 {isinstance}
+    19924    0.002    0.000    0.002    0.000 {len}
+        1    0.000    0.000    0.000    0.000 {map}
+       20    0.071    0.004    0.071    0.004 {method 'acquire' of 'thread.lock' objects}
+      204    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        5    0.000    0.000    0.000    0.000 {method 'fileno' of '_socket.socket' objects}
+        4    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
+    19900    0.002    0.000    0.002    0.000 {method 'iteritems' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 {method 'join' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {method 'keys' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 {method 'lstrip' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {method 'readline' of 'file' objects}
+        1    0.001    0.001    0.001    0.001 {method 'readlines' of 'file' objects}
+       10    0.000    0.000    0.000    0.000 {method 'release' of 'thread.lock' objects}
+        4    0.000    0.000    0.000    0.000 {method 'replace' of 'str' objects}
+        5    0.000    0.000    0.000    0.000 {method 'send' of '_socket.socket' objects}
+     3736    0.004    0.000    0.004    0.000 {method 'split' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 {method 'startswith' of 'str' objects}
+    18095    0.408    0.000    0.408    0.000 {min}
+        1    0.000    0.000    0.000    0.000 {nt._getfullpathname}
+        1    0.000    0.000    0.000    0.000 {open}
+        5    0.000    0.000    0.000    0.000 {select.select}
+       10    0.000    0.000    0.000    0.000 {thread.allocate_lock}
+       25    0.000    0.000    0.000    0.000 {thread.get_ident}
+
+

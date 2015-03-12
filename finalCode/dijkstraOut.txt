@@ -1,0 +1,45 @@
+Wed Mar 11 19:17:48 2015    dijresults.txt
+
+         352443 function calls in 1.340 seconds
+
+   Ordered by: cumulative time
+   List reduced from 37 to 35 due to restriction <35>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.506    0.506    1.340    1.340 dijkstra.py:6(<module>)
+   104200    0.252    0.000    0.655    0.000 dijkstra.py:48(addEdge)
+   104200    0.242    0.000    0.242    0.000 dijkstra.py:19(addAdjacentNode)
+    19896    0.134    0.000    0.160    0.000 dijkstra.py:36(addNode)
+   104203    0.093    0.000    0.093    0.000 {method 'split' of 'str' objects}
+        1    0.085    0.085    0.085    0.085 {method 'readlines' of 'file' objects}
+    19896    0.026    0.000    0.026    0.000 dijkstra.py:12(__init__)
+        1    0.001    0.001    0.001    0.001 {method 'readline' of 'file' objects}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:379(realpath)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:365(abspath)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:387(_joinrealpath)
+        1    0.000    0.000    0.000    0.000 {open}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:336(normpath)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:139(islink)
+        1    0.000    0.000    0.000    0.000 {map}
+        2    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:59(isabs)
+        1    0.000    0.000    0.000    0.000 {posix.lstat}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:127(dirname)
+        2    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:68(join)
+        8    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        6    0.000    0.000    0.000    0.000 {method 'startswith' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 dijkstra.py:110(<lambda>)
+        1    0.000    0.000    0.000    0.000 {posix.getcwd}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/stat.py:55(S_ISLNK)
+        1    0.000    0.000    0.000    0.000 {method 'replace' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {method 'rstrip' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 dijkstra.py:11(Node)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 dijkstra.py:32(__init__)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/stat.py:24(S_IFMT)
+        1    0.000    0.000    0.000    0.000 {method 'partition' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {method 'join' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {len}
+        1    0.000    0.000    0.000    0.000 {method 'rfind' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {method 'endswith' of 'str' objects}
+
+

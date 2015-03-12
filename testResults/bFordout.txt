@@ -1,0 +1,45 @@
+Wed Mar 11 23:23:31 2015    bfordresults.txt
+
+         2405898824 function calls (2005858824 primitive calls) in 13428.234 seconds
+
+   Ordered by: cumulative time
+   List reduced from 39 to 35 due to restriction <35>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1  844.582  844.582 13428.234 13428.234 bFord.py:1(<module>)
+400000000 10366.889    0.000 10366.889    0.000 bFord.py:12(calculate_least_adjacent_cost)
+400040000/20000  753.981    0.000 1961.758    0.098 /usr/lib/python2.7/copy.py:145(deepcopy)
+40000/20000  533.510    0.013 1961.525    0.098 /usr/lib/python2.7/copy.py:226(_deepcopy_list)
+400000001  250.551    0.000  250.551    0.000 {min}
+400780000  234.862    0.000  234.862    0.000 {method 'get' of 'dict' objects}
+401739395  221.080    0.000  221.080    0.000 {method 'append' of 'list' objects}
+400840000  216.906    0.000  216.906    0.000 {id}
+    20002    2.885    0.000    2.885    0.000 {range}
+   740000    1.712    0.000    2.588    0.000 /usr/lib/python2.7/copy.py:267(_keep_alive)
+   999389    0.775    0.000    0.775    0.000 {method 'split' of 'str' objects}
+   700000    0.412    0.000    0.412    0.000 /usr/lib/python2.7/copy.py:198(_deepcopy_atomic)
+        1    0.087    0.087    0.087    0.087 {method 'readlines' of 'file' objects}
+        1    0.001    0.001    0.001    0.001 {method 'readline' of 'file' objects}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:379(realpath)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:365(abspath)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:387(_joinrealpath)
+        1    0.000    0.000    0.000    0.000 {open}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:336(normpath)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:139(islink)
+        1    0.000    0.000    0.000    0.000 {posix.lstat}
+        1    0.000    0.000    0.000    0.000 {map}
+        2    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:59(isabs)
+        2    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:68(join)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:127(dirname)
+        6    0.000    0.000    0.000    0.000 {method 'startswith' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 bFord.py:25(<lambda>)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/stat.py:55(S_ISLNK)
+        1    0.000    0.000    0.000    0.000 {posix.getcwd}
+        1    0.000    0.000    0.000    0.000 {method 'replace' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 {isinstance}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/stat.py:24(S_IFMT)
+        1    0.000    0.000    0.000    0.000 {method 'partition' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {method 'rstrip' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {method 'join' of 'str' objects}
+
+

@@ -1,0 +1,127 @@
+Shortest Path: 509
+         444200 function calls (403800 primitive calls) in 0.401 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.401    0.401 <string>:1(<module>)
+        2    0.000    0.000    0.017    0.008 PyShell.py:1347(write)
+    40000    0.218    0.000    0.218    0.000 bFord.py:12(calculate_least_adjacent_cost)
+        1    0.030    0.030    0.401    0.401 bFord.py:49(Start)
+40400/200    0.065    0.000    0.129    0.001 copy.py:145(deepcopy)
+    40000    0.004    0.000    0.004    0.000 copy.py:198(_deepcopy_atomic)
+  400/200    0.019    0.000    0.129    0.001 copy.py:226(_deepcopy_list)
+    40400    0.024    0.000    0.029    0.000 copy.py:267(_keep_alive)
+       21    0.000    0.000    0.000    0.000 rpc.py:149(debug)
+        3    0.000    0.000    0.017    0.006 rpc.py:208(remotecall)
+        3    0.000    0.000    0.000    0.000 rpc.py:218(asynccall)
+        3    0.000    0.000    0.016    0.005 rpc.py:238(asyncreturn)
+        3    0.000    0.000    0.000    0.000 rpc.py:244(decoderesponse)
+        3    0.000    0.000    0.016    0.005 rpc.py:279(getresponse)
+        3    0.000    0.000    0.000    0.000 rpc.py:287(_proxify)
+        3    0.000    0.000    0.016    0.005 rpc.py:295(_getresponse)
+        3    0.000    0.000    0.000    0.000 rpc.py:317(newseq)
+        3    0.000    0.000    0.000    0.000 rpc.py:321(putmessage)
+        2    0.000    0.000    0.015    0.008 rpc.py:546(__getattr__)
+        1    0.000    0.000    0.015    0.015 rpc.py:564(__getmethods)
+        2    0.000    0.000    0.000    0.000 rpc.py:589(__init__)
+        2    0.000    0.000    0.002    0.001 rpc.py:594(__call__)
+        3    0.000    0.000    0.000    0.000 socket.py:223(meth)
+        3    0.000    0.000    0.000    0.000 threading.py:114(RLock)
+        6    0.000    0.000    0.000    0.000 threading.py:1152(currentThread)
+        3    0.000    0.000    0.000    0.000 threading.py:132(__init__)
+        3    0.000    0.000    0.000    0.000 threading.py:147(acquire)
+        3    0.000    0.000    0.000    0.000 threading.py:187(release)
+        3    0.000    0.000    0.000    0.000 threading.py:220(_acquire_restore)
+        3    0.000    0.000    0.000    0.000 threading.py:228(_release_save)
+        3    0.000    0.000    0.000    0.000 threading.py:238(_is_owned)
+        3    0.000    0.000    0.000    0.000 threading.py:242(Condition)
+        3    0.000    0.000    0.000    0.000 threading.py:260(__init__)
+        3    0.000    0.000    0.016    0.005 threading.py:309(wait)
+        6    0.000    0.000    0.000    0.000 threading.py:59(__init__)
+       15    0.000    0.000    0.000    0.000 threading.py:64(_note)
+        3    0.000    0.000    0.000    0.000 {_struct.pack}
+        3    0.000    0.000    0.000    0.000 {cPickle.dumps}
+        3    0.000    0.000    0.000    0.000 {getattr}
+    81400    0.004    0.000    0.004    0.000 {id}
+        6    0.000    0.000    0.000    0.000 {isinstance}
+        9    0.000    0.000    0.000    0.000 {len}
+       12    0.016    0.001    0.016    0.001 {method 'acquire' of 'thread.lock' objects}
+    80403    0.006    0.000    0.006    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        3    0.000    0.000    0.000    0.000 {method 'fileno' of '_socket.socket' objects}
+    80802    0.007    0.000    0.007    0.000 {method 'get' of 'dict' objects}
+        6    0.000    0.000    0.000    0.000 {method 'release' of 'thread.lock' objects}
+        3    0.000    0.000    0.000    0.000 {method 'send' of '_socket.socket' objects}
+    40001    0.007    0.000    0.007    0.000 {min}
+      202    0.000    0.000    0.000    0.000 {range}
+        3    0.000    0.000    0.000    0.000 {select.select}
+        6    0.000    0.000    0.000    0.000 {thread.allocate_lock}
+       15    0.000    0.000    0.000    0.000 {thread.get_ident}
+
+
+
+
+ONE MORE TIME
+
+
+Shortest Path: 509
+         444200 function calls (403800 primitive calls) in 0.403 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.403    0.403 <string>:1(<module>)
+        2    0.000    0.000    0.003    0.001 PyShell.py:1347(write)
+    40000    0.231    0.000    0.231    0.000 bFord.py:12(calculate_least_adjacent_cost)
+        1    0.032    0.032    0.403    0.403 bFord.py:49(Start)
+40400/200    0.065    0.000    0.130    0.001 copy.py:145(deepcopy)
+    40000    0.004    0.000    0.004    0.000 copy.py:198(_deepcopy_atomic)
+  400/200    0.019    0.000    0.129    0.001 copy.py:226(_deepcopy_list)
+    40400    0.024    0.000    0.029    0.000 copy.py:267(_keep_alive)
+       21    0.000    0.000    0.000    0.000 rpc.py:149(debug)
+        3    0.000    0.000    0.003    0.001 rpc.py:208(remotecall)
+        3    0.000    0.000    0.000    0.000 rpc.py:218(asynccall)
+        3    0.000    0.000    0.003    0.001 rpc.py:238(asyncreturn)
+        3    0.000    0.000    0.000    0.000 rpc.py:244(decoderesponse)
+        3    0.000    0.000    0.002    0.001 rpc.py:279(getresponse)
+        3    0.000    0.000    0.000    0.000 rpc.py:287(_proxify)
+        3    0.000    0.000    0.002    0.001 rpc.py:295(_getresponse)
+        3    0.000    0.000    0.000    0.000 rpc.py:317(newseq)
+        3    0.000    0.000    0.000    0.000 rpc.py:321(putmessage)
+        2    0.000    0.000    0.001    0.001 rpc.py:546(__getattr__)
+        1    0.000    0.000    0.001    0.001 rpc.py:564(__getmethods)
+        2    0.000    0.000    0.000    0.000 rpc.py:589(__init__)
+        2    0.000    0.000    0.002    0.001 rpc.py:594(__call__)
+        3    0.000    0.000    0.000    0.000 socket.py:223(meth)
+        3    0.000    0.000    0.000    0.000 threading.py:114(RLock)
+        6    0.000    0.000    0.000    0.000 threading.py:1152(currentThread)
+        3    0.000    0.000    0.000    0.000 threading.py:132(__init__)
+        3    0.000    0.000    0.000    0.000 threading.py:147(acquire)
+        3    0.000    0.000    0.000    0.000 threading.py:187(release)
+        3    0.000    0.000    0.000    0.000 threading.py:220(_acquire_restore)
+        3    0.000    0.000    0.000    0.000 threading.py:228(_release_save)
+        3    0.000    0.000    0.000    0.000 threading.py:238(_is_owned)
+        3    0.000    0.000    0.000    0.000 threading.py:242(Condition)
+        3    0.000    0.000    0.000    0.000 threading.py:260(__init__)
+        3    0.000    0.000    0.002    0.001 threading.py:309(wait)
+        6    0.000    0.000    0.000    0.000 threading.py:59(__init__)
+       15    0.000    0.000    0.000    0.000 threading.py:64(_note)
+        3    0.000    0.000    0.000    0.000 {_struct.pack}
+        3    0.000    0.000    0.000    0.000 {cPickle.dumps}
+        3    0.000    0.000    0.000    0.000 {getattr}
+    81400    0.004    0.000    0.004    0.000 {id}
+        6    0.000    0.000    0.000    0.000 {isinstance}
+        9    0.000    0.000    0.000    0.000 {len}
+       12    0.002    0.000    0.002    0.000 {method 'acquire' of 'thread.lock' objects}
+    80403    0.006    0.000    0.006    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        3    0.000    0.000    0.000    0.000 {method 'fileno' of '_socket.socket' objects}
+    80802    0.007    0.000    0.007    0.000 {method 'get' of 'dict' objects}
+        6    0.000    0.000    0.000    0.000 {method 'release' of 'thread.lock' objects}
+        3    0.000    0.000    0.000    0.000 {method 'send' of '_socket.socket' objects}
+    40001    0.007    0.000    0.007    0.000 {min}
+      202    0.000    0.000    0.000    0.000 {range}
+        3    0.000    0.000    0.000    0.000 {select.select}
+        6    0.000    0.000    0.000    0.000 {thread.allocate_lock}
+       15    0.000    0.000    0.000    0.000 {thread.get_ident}

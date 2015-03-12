@@ -1,0 +1,45 @@
+Wed Mar 11 16:56:55 2015    results.txt
+
+         11801976 function calls in 158.346 seconds
+
+   Ordered by: cumulative time
+   List reduced from 40 to 35 due to restriction <35>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1   17.128   17.128  158.346  158.346 test.py:6(<module>)
+  3882091  131.505    0.000  131.505    0.000 test.py:109(calculate_least_adjacent_cost)
+   999387    2.517    0.000    5.710    0.000 test.py:48(addEdge)
+   999387    3.005    0.000    3.005    0.000 test.py:19(addAdjacentNode)
+  3882090    2.152    0.000    2.152    0.000 {min}
+   999389    0.830    0.000    0.830    0.000 {method 'split' of 'str' objects}
+   999395    0.749    0.000    0.749    0.000 {method 'append' of 'list' objects}
+        1    0.234    0.234    0.234    0.234 {method 'readlines' of 'file' objects}
+    20000    0.065    0.000    0.188    0.000 test.py:36(addNode)
+    20000    0.123    0.000    0.123    0.000 test.py:12(__init__)
+      197    0.030    0.000    0.030    0.000 {range}
+        1    0.007    0.007    0.007    0.007 {method 'readline' of 'file' objects}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:379(realpath)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:387(_joinrealpath)
+        1    0.000    0.000    0.000    0.000 {open}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:139(islink)
+        1    0.000    0.000    0.000    0.000 {posix.lstat}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:365(abspath)
+        2    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:59(isabs)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:336(normpath)
+        1    0.000    0.000    0.000    0.000 {map}
+        2    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:68(join)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/posixpath.py:127(dirname)
+        2    0.000    0.000    0.000    0.000 test.py:127(<lambda>)
+        6    0.000    0.000    0.000    0.000 {method 'startswith' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {posix.getcwd}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/stat.py:55(S_ISLNK)
+        1    0.000    0.000    0.000    0.000 {method 'replace' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 {isinstance}
+        1    0.000    0.000    0.000    0.000 test.py:31(Graph)
+        1    0.000    0.000    0.000    0.000 test.py:11(Node)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python2.7/stat.py:24(S_IFMT)
+        1    0.000    0.000    0.000    0.000 {method 'rfind' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 test.py:32(__init__)
+        1    0.000    0.000    0.000    0.000 {method 'partition' of 'str' objects}
+
+

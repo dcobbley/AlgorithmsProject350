@@ -1,0 +1,4 @@
+#!/bin/bash
+python -m cProfile -o dijresults.txt dijkstra.py
+python dijkstraResults.py > dijkstraOut.txt
+

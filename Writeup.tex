@@ -184,6 +184,41 @@ $\text{for}$ \hspace{0.5 pt} $i$ \hspace{0.5 pt} $\text{from}$ \hspace{0.5 pt} $
 Note: relax() maintains the invariant that $v.d \geq \delta(s,v) \forall v \in V$
 
 (Demaine, 2011)
+
+\section{Data Structures}
+
+\textbf{Interlude to ADT:}
+
+Graphs can be represented in multiple ways because it is an abstract data type.  The data structure that is being fed into the algorithm can affect the run time of the program.  Adding can cost O($\mid$ E $\mid$) for adjacency list, O($\mid V{^2} \mid$) for adjacency matrix, and O($\mid$ V $\mid \times \mid$ E $\mid$) for the incidence matrix.  A query can give O($\mid$ V $\mid$) for adjacency list, O(1) for adjacency matrix, and O($\mid$ E $\mid$) for incidence matrix. These differences in how the graph itself is implemented will have major implications on run time due to graph construction.
+
+\textbf{Basis for Bellman-Ford and Dijkstra:}
+
+We know that Bellman-Ford operates on O($\mid$ V $\mid \times \mid$ E $\mid$) based  on the fact that there are two loops on vertices and edges.  We also know that unmodified Dijkstra operates on O($\mid V{^2} \mid$) due to loops to examine all vertices for shortest paths and iterate through all vertices.  Adding data structures or abstract data types can enhance the speed of the Bellman-Ford and Dijkstra greatly by improving the retrieval of edges with the least weight or by taking advantage of the properties of graphs.
+
+\textbf{Improving Bellman-Ford:}
+
+Bellman-Ford has been improved upon in a couple of ways.  Yen described two improvements for graphs without negative-weight cycles.  These changes did not alter the worst case of O($\mid$ V $\mid \times \mid$ E $\mid$).  
+Yen (1970) prescribed a change to avoid relaxing edges out of the vertices a second time if no changes have been made. This helped reduce cost at constant-factor savings when dealing with dense graphs because constantly iterating over edges and assigning them the original weight would make the algorithm more expensive.  This method dealt with the properties of the graph and thus does not translate to all cases of the graph.
+
+
+The second method gives arbitrary linear order to the vertices and partitioning them into two subsets.  The subset $E_f$ contains all edges ($v_i , v_j$)  such that i \textless j.  The subset $E_b$ orders the same tuple such that i \textless j.  Yen (1970) reported that the modification reduces the worst-case number of iterations of the main loop of the algorithm from $\mid$ V $\mid - 1$ to $\frac{\mid V \mid}{2}$.  Bannister and Eppstein (2012)  reported that by changing the arbitrary linear order and partitions to random permutation that the iterations can be improved to $\frac{\mid V \mid}{3}$ with a high probability.
+
+
+We can also take advantage of the best case scenario of the graph that if it is a directed acyclic graph we can make further improvements to Bellman-Ford.  We can obtain a O($\mid$V $\mid + \mid$ E $\mid$) by utilizing a topological sort in the algorithm, which enhances the loop by giving neighbors more readily.  This would allow us to perform depth-first search for O($\mid$V $\mid + \mid$ E $\mid$).  We can then walk through the vertices and relax the edges to get the shortest paths in total of O($\mid$V $\mid + \mid$ E $\mid$).
+
+\textbf{Improving Dijkstra:}
+	Dijkstra's algorithm can be made to go faster than $O(|V|^2)$ by using data structures to make the retrieval of the shortest path at a given node faster. A priority queue implemented with a min-heap can lead to faster computing times. We can use insert\_with\_priority, decrease\_priority, and get\_minimum. We can store the possible paths in the queue and obtain the shortest path, which improves the performance of Dijkstra's to $O(|V|+|E|log |V|)$. 
+	
+	
+Another data structure that was suggested to improve Dijkstra's algorithm is a Fibonacci heap, which can speed up the process to $O(|E| + |V| log |V|)$ because its get\_minimum is $O(1)$ amortized time. Insert, decrease\_key, and merge work in constant amortized time, which improves upon the min heap priority queue. The properties of the graph can affect these performances based on the number of edges in relation to vertices. If the graph has more edges than vertices, then intuitively we would like to have the log modifier be attached to vertices, which makes the Fibonacci heap ideal. If there are more vertices than edges, then we want the log modifier to be attached to the edges, which would make the Min heap better. Also, if the graph is a DAG, then the same topological sort with a depth-first search can also be used to improve the algorithm in a similar fashion as Bellman-Ford. 
+
+
+Another problem with Dijkstra's algorithm is that methods needed to speed up the process may have low worst case time bounds, but are incredibly hard to implement. We see this in the case of using the Fibonacci heap and even Brodal queue, which have very low worst case time bounds.  The creators themselves have described them to be "quite complicated" and "[not] applicable in practice".
+
+
+The use of data structures in decreasing the running time of Dijkstra and Bellman-Ford shortest path algorithm appears to be tailored towards properties of the graph and the ideal structure to handle the type of graph. For the purposes of this project, we can assume that comparing the worst case running time is sufficient to determine which algorithm is better. We expected Dijkstra's algorithm to outperform Bellman-Ford for our tests.
+
+
 \section{Testing Procedure}
 We modified code for Dijktra's and Bellman-Ford algorithms found online (listed in the Sources section), and ran tests to compare the time complexity of each algorithm with controlled data sets.  We also controlled for differences in operating system efficiency; we chose Linux as our testing platform.  In the course of testing, we also used Python metrics tools (cProfile and time).  Once we located the source code we chose to modify, we first ran preliminary tests for correctness and rough time estimates.  Both the Python time and cProfile tools were run from the command line, to verify program correctness and completeness at the most basic level.  Once the raw source code passed these tests, we could modify the code.
 To modify the code, we changed the data reading functionality to read in large data sets (200,000 nodes).  We needed a large data set to make a meaningful time comparison.
@@ -210,22 +245,118 @@ For this project, we used two data sets of sample data. One graph with 200 verte
     40000    0.023    0.000    0.023    0.000 /usr/lib/python2.7/copy.py:198(_deepcopy_atomic)
 \end{verbatim}
 
-From data like this over our sample graphs, we got some very interesting results. Testing the smaller sample size with Dijkstras took 206,015 function calls with a total process time of 1.835 seconds. Our Bellman-Ford took 451,518 function calls but with only 0.793 seconds for run time. 
+From data like this over our sample graphs, we got some very interesting results. \\
 
+\begin{multicols}{2}
+
+\hspace{20 pt} \textbf{Data Set}\\
+\centering
 \begin{tabular}{||c|c|c||}
 \hline
 & medium & large \\
 \hline
 $V$ & 200 & 20,000\\
+\hline
 $E$ & 3734 & 999,387\\
+\hline
+\end{tabular}\\
+
+\hspace{5 pt} \textbf{Calculated Big O}\\
+\centering
+\begin{tabular}{||c|c|c||}
+\hline
+& Medium & Large \\
+\hline
+Dijkstra & 400000 &400000000\\
+\hline
+Bellman-Ford & 746800  & 19987740000\\
+\hline
+\end{tabular}
+
+\end{multicols}
+
+
+\begin{multicols}{2}
+\hspace{20 pt} \textbf{Medium Results}\\
+\centering
+\begin{tabular}{||c|c|c||}
+\hline
+& Num func. calls & Rutime (sec) \\
+\hline
+Dijkstra & 206015 & 1.835\\
+\hline
+Bellman-Ford & 451518 & 0.793\\
 \hline
 \end{tabular}
 
 
------------Large sample Size results here ----------------
+\hspace{05 pt} \textbf{Large Results}\\
+\centering
+\begin{tabular}{||c|c|c||}
+\hline
+& Num func. calls & Rutime (sec) \\
+\hline
+Dijkstra &  & \\
+\hline
+Bellman-Ford & 2405898824 & 13428.234 \\
+\hline
+\end{tabular}
+\end{multicols}
+
+
+
+\vspace{15 pt}
+One of the most interesting results from our analysis was that we got very consistent run time results. More so the fact that our implementation of Dijkstra had a longer run time and less number of function calls, while our Bellman-Ford had double the number of function calls while having less than half the run-time. We actually were so confused by this that we tested our software with two different metric tools, including putting counters in the source code to verify this was true. We can only speculate that something to do with our language of choice, system hardware, or implementation of the algorithms had come into play.
+
+When we began getting results back from our data, we immediately began calculating where else these function calls came from. We noted that while our Dijkstra runs in $O(v^2)$ we had not thought about the fact that building the graph takes $O(v^2)$ as well as source input is $O(E)$. While these values are trivial in the theoretical world and get factored out as a constant or smaller value, they still add up when the code runs. 
+Our Bellman-Ford runs in $O(v \cdot E)$ but its adjacency list takes $O(v+E)$ with source input taking $O(E)$. We enjoyed running the software and seeing visually how much quicker this algorithm was to build versus the graph in Dijkstras.
+
+This led us to look at how python implements dictionaries and lists in python.
+\begin{multicols}{2}
+
+\hspace{35 pt} \textbf{List}\\
+\centering
+\begin{tabular}{||c|c|c||}
+\hline
+Operation & Average & Worst \\
+\hline
+Append & $O(1)$ & $O(1)$ \\
+\hline
+Insert & $O(n)$ & $O(n)$ \\
+\hline
+Iteration & $O(n)$  & $O(n)$ \\
+\hline
+\end{tabular}
+
+\hspace{5 pt} \textbf{Dictionaries}\\
+\centering
+\begin{tabular}{||c|c|c||}
+\hline
+Operation & Average & Worst \\
+\hline
+Get Item & $O(1)$ & $O(n)$ \\
+\hline
+Set Item & $O(1)$ & $O(n)$ \\
+\hline
+Iteration & $O(n)$  & $O(n)$ \\
+\hline
+\end{tabular}
+\end{multicols}
+\hspace{50 mm} \textit{Taken from the Python manual.}
+
+The data structure big O of the two data structures seems to have a time complexity equivalent to each other. 
+We began to realize our function calls were not doing the same amount of work as we thought they were. We began going back over our code line by line to determine the cause. We discovered that the library we called for creating dictionaries takes six times longer than the implementation that the creators of Python recommend for this operation. We also noticed that our Bellman-Ford algorithm uses the proper way to create dictionaries, giving it a speed up far greater than the implementation of our Dijkstra algorithm.
 
 \section{Conclusion}
+We were astonished when we ran these two algorithms to see just how many operations were performed. We quickly learned that implementation is everything. You can follow the algorithm to the letter, and still end up with mixed results. We knew that choosing Python for implementation certainly would not be the fastest, but this really goes to show how a scripting language can hide the implementation details. The only difference between the dictionary structures function call which slowed us down so much was:
 
+\begin{verbatim}
+dict{}   VS   dict()
+\end{verbatim}
+
+This coupled with fact that we implemented a dictionary of dictionaries each with a rate 6 times slower gave us very poor run time results.
+
+Asside from this fact, we did see that the count of the main operations matches our calculated big O. With the data set we used, our big O matched, that is once we started taking into account operations like building the graphs with the structures we used, as well as debug print statement operations. Most things taking only $O(n)$ but still needed to be taken into account when trying to match the calculated to actual results
 \section{Sources}
 
 \begin{verbatim}
@@ -237,24 +368,40 @@ https://github.com/mneedham/algorithms2/tree/master/shortestpath
 [1] ACM Digital Library
 dl.acm.org.proxy.lib.pdx.edu,. (2015). Retrieved 11 February 2015
 
-[2] Cormen, Thomas H., Clifford Stein, Ronald L. Rivest, and Charles E. Leiserson.
+[2] Bannister, M.J., Eppstein, D. (2012). Randomized speedup of the Bellman-Ford algorithm.  Analytic Algorithmics and Combinatorics (ANALC012), Kyoto, Japan. pp. 41-47. arXiv 1111.5414.
+
+[3] Cormen, Thomas H., Clifford Stein, Ronald L. Rivest, and Charles E. Leiserson.
 2001. Introduction to Algorithms (2nd ed.). McGraw-Hill Higher Education. 
 
-[3] Demaine, Erik, courses.csail.mit.edu,. (2011). Retrieved 8 March 2015, from http://courses.csail.mit.edu/6.006/spring11/lectures/lec15.pdf
+[4] Demaine, Erik, courses.csail.mit.edu,. (2011). Retrieved 8 March 2015, from http://courses.csail.mit.edu/6.006/spring11/lectures/lec15.pdf
 
-[4] Harel, David, Proving the correctness of regular deterministic programs: A unifying survey using dynamic logic, Theoretical Computer Science, Volume 12, Issue 1, September 1980, Pages 61-81, ISSN 0304-3975, http://dx.doi.org/10.1016/0304-3975(80)90005-5.
+[5] Harel, David, Proving the correctness of regular deterministic programs: A unifying survey using dynamic logic, Theoretical Computer Science, Volume 12, Issue 1, September 1980, Pages 61-81, ISSN 0304-3975, http://dx.doi.org/10.1016/0304-3975(80)90005-5.
 http://www.sciencedirect.com/science/article/pii/0304397580900055
 
-[5] Magzhan, Kairanbay, and Hajar Mat Jani, 'A Review And Evaluations Of Shortest Path Algorithms'. International Journal of Scientific & Technology Research, Volume 2, Issue 6, June 2013, Pages 99-104, ISSN 2277-8616. Web. 15 Feb. 2015.
+[6] Magzhan, Kairanbay, and Hajar Mat Jani, 'A Review And Evaluations Of Shortest Path Algorithms'. International Journal of Scientific & Technology Research, Volume 2, Issue 6, June 2013, Pages 99-104, ISSN 2277-8616. Web. 15 Feb. 2015.
 http://www.ijstr.org/final-print/june2013/A-Review-And-Evaluations-Of-Shortest-Path-Algorithms.pdf
 
-[6] Meyer, Ulrich, 'Average-case complexity of single-source shortest-paths algorithms: lower and upper bounds', Journal of Algorithms, Volume 48, Issue 1, August 2003, Pages 91-134, ISSN 0196-6774, http://dx.doi.org/10.1016/S0196-6774(03)00046-4.
+[7] Meyer, Ulrich, 'Average-case complexity of single-source shortest-paths algorithms: lower and upper bounds', Journal of Algorithms, Volume 48, Issue 1, August 2003, Pages 91-134, ISSN 0196-6774, http://dx.doi.org/10.1016/S0196-6774(03)00046-4.
 http://www.sciencedirect.com/science/article/pii/S0196677403000464
 
-[7] Saunders, Shane, and Tadao Takaoka, 'Improved shortest path algorithms for nearly acyclic graphs'. Theoretical Computer Science, Volume 293, Issue 3, 9 February 2003, Pages 535-556, ISSN 0304-3975, http://dx.doi.org/10.1016/S0304-3975(02)00613-8.
+[8] Saunders, Shane, and Tadao Takaoka, 'Improved shortest path algorithms for nearly acyclic graphs'. Theoretical Computer Science, Volume 293, Issue 3, 9 February 2003, Pages 535-556, ISSN 0304-3975, http://dx.doi.org/10.1016/S0304-3975(02)00613-8.
 http://www.sciencedirect.com/science/article/pii/S0304397502006138
 
-[8] Yan, Melissa, math.mit.edu,. (2014). Retrieved 9 March 2015, from http://math.mit.edu/~rothvoss/18.304.3PM/Presentations/1-Melissa.pdf
+[9] Yan, Melissa, math.mit.edu,. (2014). Retrieved 9 March 2015, from http://math.mit.edu/~rothvoss/18.304.3PM/Presentations/1-Melissa.pdf
+
+[10] Yen, Jin Y. (1970). "An algorithm for finding shortest routes from all source nodes to a given destination in general networks". Quarterly of Applied Mathematics 27: 536-530. MR 0253822.
+
+[11] Bannister, M. J.; Eppstein, D. (2012). Randomized speedup of the Bellman-Ford algorithm. Analytic Algorithmics and Combinatorics (ANALCO12), Kyoto, Japan. pp. 41-47. arXiv:1111.5414.
+
+[12] Yen, Jin Y. (1970). "An algorithm for finding shortest routes from all source nodes to a given destination in general networks". Quarterly of Applied Mathematics 27: 526-530.MR 0253822.
+
+[13]Gerth Stolting Brodal and Chris Okasaki (1996). Optimal purely functional priority queues. J. Functional Programming.
+
+[14]Fredman, Michael Lawrence; Tarjan, Robert E. (1987). "Fibonacci heaps and their uses in improved network optimization algorithms"(PDF). Journal of the Association for Computing Machinery 34 (3): 596-615. doi:10.1145/28869.28874.
+
+[15]Gerth Stolting Brodal (1996), "Worst-Case Efficient Priority Queues",Proc. 7th ACM-SIAM Symposium on Discrete Algorithms (Society for Industrial and Applied Mathematics): 52-58,doi:10.1145/313852.313883, ISBN 0-89871-366-8, CiteSeerX: 10.1.1.43.8133
+
+[16]Dijkstra, E. W. (1959). "A note on two problems in connexion with graphs". Numerische Mathematik 1: 269-271.doi:10.1007/BF01386390.
 
 \end{lstlisting}
 
