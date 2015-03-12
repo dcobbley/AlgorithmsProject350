@@ -24,9 +24,14 @@ breaklines=true
 
 \maketitle
 
+\tableofcontents
+
+\pagebreak
+
 \section{Introduction}
-For our algorithm comparison and testing, we chose to compare two shortest-path algorithms.  After examining different algorithms that found shortest path between nodes of a graph, we chose Bellman-Ford and Dijkstra's algorithms.
-We compared the Bellman-Ford and Dijkstra's shortest path algorithm on sets of data and compared several sets of metrics to see which algorithm is more efficient.  To supplement our own testing, we researched the two algorithms and recorded their textbook time complexities to compare with our own tests.
+For our algorithm comparison and testing, we chose to compare two shortest-path algorithms.  After examining different algorithms that found shortest path between nodes of a graph, we chose Bellman-Ford and Dijkstra's algorithms.  We chose these algorithms because they are both well-researched shortest-path algorithms that have had algorithmic and data structure improvements.  Their asymptotic time complexity is close, but not identical; we felt that that would lead to interesting test results when we ran tests ourselves.
+
+For our own testing procedures, we compared the Bellman-Ford and Dijkstra's shortest path algorithm on identical sets of data and compared several sets of metrics to see which algorithm is more efficient.  To supplement our own testing, we researched the two algorithms and recorded their textbook time complexities to compare with our own tests.
 
 \section{Terms}
 In a directed graph $G=(V,E)$ with $V$ vertices and $E$ weighted edges:
@@ -46,11 +51,11 @@ $w(p)=\displaystyle\sum_{i=1}^{k} w(v_{i-1},v_{i})$
 \\
 (Cormen, 2001)
 \section{Background info}
-The Dijkstra's algorithm we selected has a time complexity of $O((|V|+|E|)+log|V|)$.
-The algorithm used here was the version modified from Dijkstra's original algorithm, and uses a min-priority queue and a Fibonacci heap to improve time complexity.  Dijkstra's as used here is a single-source shortest path algorithm.  It builds a shortest path tree to find the shortest path between a node and all other nodes in the graph it is traversing. (Kairanbay, 2013)
+The optimized Dijkstra's algorithm has a time complexity of $O((|V|+|E|)+log|V|)$.
+The algorithm with this time complexity is the version modified from Dijkstra's original algorithm, and uses a min-priority queue and a Fibonacci heap to improve time complexity.  Dijkstra's as used here is a single-source shortest path algorithm.  It builds a shortest path tree to find the shortest path between a node and all other nodes in the graph it is traversing. (Kairanbay, 2013)
 
 
-Correctness: 
+\textbf{Correctness:} 
 
 Inductive proof:
 
@@ -77,69 +82,186 @@ $l(P) \geq l(P') + l(x,y) \geq d(x) + l(x,y) \geq \pi(y) \geq \pi(v)$
 (Harel, 1980)
 
 
-Completeness:
+\textbf{Completeness:}
 Dijkstra's algorithm is complete based on the fact that it will always terminate and have valid output given a valid input.
 The algorithm will always terminate given valid input because Dijkstra's algorithm considers all vertices of the graph. As such, the set $V$ of all vertices, will eventually match the set of vertices that are analyzed by the algorithm for building shortest paths.  Once all input has been consumed, the algorithm alchitecture guarentees a valid output for a given valid input.
 \\Based on the proof seen in Cormen (2001), Harel(1980),  and our adaptations for the code.
 
-Psuedocode:
+\textbf{Psuedocode:}
+
+distance[s] $\leftarrow$ \O
+
+$\forall v \in V$\textemdash\{s\}
+
+\hspace{5 pt} do distance[v] $\leftarrow \infty$
+
+S $\leftarrow$ \O
+
+Q $\leftarrow$ V
+
+while $Q \neq$ \O
+
+do u $\leftarrow$ min-distance(Q,dist)
+
+\hspace{5 pt} $\text{S} \leftarrow \text{S} \cup \{u\}$
+
+\hspace{5 pt}\hspace{5 pt} $\forall \text{v} \in \text{neighbors[u]}$
+
+\hspace{5 pt}\hspace{5 pt}\hspace{5 pt} $\text{do if distance[v]} \geq \text{dist[u]} + w(u,v)$
+
+\hspace{5 pt}\hspace{5 pt}\hspace{5 pt}\hspace{5 pt} $\text{then d[v]} \rightarrow \text{d[u]} + w(u, v)$
+
+return distance
+
+(Yan, 2014)
 \begin{verbatim}
 
 \end{verbatim}
 
-Our Bellman-Ford algorithm has a time complexity of $O(|V||E|)$.
+Optimized Bellman-Ford algorithm has a time complexity of $O(|V||E|)$.
 
-Correctness:
+\textbf{Correctness:}
+After iteration $i$ of Bellman Ford, $v.d$ is at most the weight of every path from  $s$ \text{to} $v$ \text{using at most } $i$ \text{edges, for all } $v \in V$
 
-Completeness:
-\\Based on the proof seen in Cormen (2001).
+Proof: By induction on $i$
 
-Psuedocode:\\
-for $v \in V\\
- v.d = \infty\\
- v.\pi = \text{None}\\
-s.d = 0\\
-\text{for} i \text{from} 1 \text{to} \mid V \mid -1:\\
- \text{for} (u,v) \in E:\\
-  \text{relax}(u,v):\\
-   \text{if} v.d > u.d + w(u,v):\\
-	v.d = u.d + w(u,v)\\
-	 v.\pi = u$\\
-\begin{verbatim}
+1. Before iteration $i$, $v.d$ $\leq$ min\{w(p):\hspace{1 pt} $\mid$ p $\mid$ $\leq$ $i-1$\} 
 
-\end{verbatim}
+2. Relaxation only decreases $v.d$'s $\rightarrow$ remains true
+
+3. Iteration $i$ considers all paths with $\leq i$ edges when relaxing
+$v$'s incoming edges.
+\\
+
+If $G=V,E)$ has no negative weight cycles, then at the end of Bellman Ford $v.d = \delta(s,v) \forall v \in V$
+
+Proof:
+
+1. Without negative weight cycles, shortest paths are simple.
+
+2. Simple paths have $\leq \mid$ V $\mid$ vertices $\Rightarrow \leq \mid$ V $\mid -  1$ edges.
+
+3. Claim: $\mid$ V $\mid - 1$ iterations make $v.d \geq \delta(s,v)$
+
+4. Can safely say $v.d \leq \delta(s,v)$
+
+(Demaine, 2011)
+
+\textbf{Completeness:}
+
+Bellman Ford correctly reports negative weight cycles reachable from $s$.
+
+Proof:
+
+1. If there is no negative weight cycle, then by triangle inequality $\delta(s,v) \leq \delta(s,u) + w(u,v)$ so Bellman Ford does not correctly report a negative weight cycle in this case.
+
+2. If there is a negative weight cycle, then one of $G$'s edges can always be relaxed (once one of the $d$ values becomes finite), so Bellman Ford always reports in this case.
+
+(Cormen, 2001) and (Demaine, 2011)
+
+\textbf{Pseudocode:}
+
+for $v \in V$
+
+\hspace{5 pt}  $v.d = \infty$
+
+\hspace{5 pt} $v.\pi = \text{None}$
+
+$s.d = 0$
+
+$\text{for}$ \hspace{0.5 pt} $i$ \hspace{0.5 pt} $\text{from}$ \hspace{0.5 pt} $1$ \hspace{0.5 pt} $\text{to}$ \hspace{0.5 pt} $\mid V \mid -1:$
+
+\hspace{5 pt}\hspace{5 pt}\hspace{5 pt}$\text{for} (u,v) \in E:$
+ 
+\hspace{5 pt}\hspace{5 pt}\hspace{5 pt}\hspace{5 pt}$\text{relax}(u,v):$
+  
+\hspace{5 pt}\hspace{5 pt}\hspace{5 pt}\hspace{5 pt}\hspace{5 pt}$\text{if}$ \hspace{1 pt} $v.d > u.d + w(u,v):$
+   
+\hspace{5 pt}\hspace{5 pt}\hspace{5 pt}\hspace{5 pt}\hspace{5 pt}\hspace{5 pt}$v.d = u.d + w(u,v)$
+	
+\hspace{5 pt}\hspace{5 pt}\hspace{5 pt}\hspace{5 pt}\hspace{5 pt}\hspace{5 pt}$v.\pi = u$
+
+Note: relax() maintains the invariant that $v.d \geq \delta(s,v) \forall v \in V$
+
+(Demaine, 2011)
 \section{Testing Procedure}
 We modified code for Dijktra's and Bellman-Ford algorithms found online (listed in the Sources section), and ran tests to compare the time complexity of each algorithm with controlled data sets.  We also controlled for differences in operating system efficiency; we chose Linux as our testing platform.  In the course of testing, we also used Python metrics tools (cProfile and time).  Once we located the source code we chose to modify, we first ran preliminary tests for correctness and rough time estimates.  Both the Python time and cProfile tools were run from the command line, to verify program correctness and completeness at the most basic level.  Once the raw source code passed these tests, we could modify the code.
-To modify the code, we changed the data reading functionality to read in large data sets (>100,000 nodes at a base level).  We needed a large data set to make a meaningful time comparison.
+To modify the code, we changed the data reading functionality to read in large data sets (200,000 nodes).  We needed a large data set to make a meaningful time comparison.
  We also modified the code to read in data sets in the same way, so that our tests would not be affected by differences in data processing.
+ 
+\pagebreak
 \section{Analysis}
+For this project, we used two data sets of sample data. One graph with 200 vertecies and 3,734 edges. The other larger set with 20,000 vertecies and 999,387 edges. We used cProfile in python to analyze our software runtime. A quick snippet of our output:
+\begin{verbatim}
+                    bfordresults.txt
+451518 function calls (411118 primitive calls) in 0.793 seconds
+   Ordered by: cumulative time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.103    0.103    0.793    0.793 bFord.py:1(<module>)
+40400/200    0.177    0.000    0.476    0.002 /usr/lib/python2.7/copy.py:145(deepcopy)
+  400/200    0.057    0.000    0.474    0.002 /usr/lib/python2.7/copy.py:226(_deepcopy_list)
+    40000    0.183    0.000    0.183    0.000 bFord.py:12(calculate_least_adjacent_cost)
+    40400    0.081    0.000    0.126    0.000 /usr/lib/python2.7/copy.py:267(_keep_alive)
+    84142    0.049    0.000    0.049    0.000 {method 'append' of 'list' objects}
+    80800    0.048    0.000    0.048    0.000 {method 'get' of 'dict' objects}
+    81400    0.045    0.000    0.045    0.000 {id}
+    40001    0.025    0.000    0.025    0.000 {min}
+    40000    0.023    0.000    0.023    0.000 /usr/lib/python2.7/copy.py:198(_deepcopy_atomic)
+\end{verbatim}
+
+From data like this over our sample graphs, we got some very interesting results. Testing the smaller sample size with Dijkstras took 206,015 function calls with a total process time of 1.835 seconds. Our Bellman-Ford took 451,518 function calls but with only 0.793 seconds for run time. 
+
+\begin{tabular}{||c|c|c||}
+\hline
+& medium & large \\
+\hline
+$V$ & 200 & 20,000\\
+$E$ & 3734 & 999,387\\
+\hline
+\end{tabular}
+
+
+-----------Large sample Size results here ----------------
+
+\section{Conclusion}
 
 \section{Sources}
 
-We used this source code for our Bellman-Ford:
 \begin{verbatim}
+Bellman-Ford source code:
 https://github.com/mneedham/algorithms2/tree/master/shortestpath
 \end{verbatim}
 
-
 \begin{lstlisting}
-[1] Cormen, Thomas H., Clifford Stein, Ronald L. Rivest, and Charles E. Leiserson.
-2001. Introduction to Algorithms (2nd ed.). McGraw-Hill Higher Education. 
-
-[2] Harel, David, Proving the correctness of regular deterministic programs: A unifying survey using dynamic logic, Theoretical Computer Science, Volume 12, Issue 1, September 1980, Pages 61-81, ISSN 0304-3975, http://dx.doi.org/10.1016/0304-3975(80)90005-5.
-http://www.sciencedirect.com/science/article/pii/0304397580900055
-
-[3] Magzhan, Kairanbay, and Hajar Mat Jani, 'A Review And Evaluations Of Shortest Path Algorithms'. International Journal of Scientific & Technology Research, Volume 2, Issue 6, June 2013, Pages 99-104, ISSN 2277-8616. Web. 15 Feb. 2015.
-http://www.ijstr.org/final-print/june2013/A-Review-And-Evaluations-Of-Shortest-Path-Algorithms.pdf
-
-[4] Meyer, Ulrich, 'Average-case complexity of single-source shortest-paths algorithms: lower and upper bounds', Journal of Algorithms, Volume 48, Issue 1, August 2003, Pages 91-134, ISSN 0196-6774, http://dx.doi.org/10.1016/S0196-6774(03)00046-4.
-http://www.sciencedirect.com/science/article/pii/S0196677403000464
-
-[5] Saunders, Shane, and Tadao Takaoka, 'Improved shortest path algorithms for nearly acyclic graphs'. Theoretical Computer Science, Volume 293, Issue 3, 9 February 2003, Pages 535-556, ISSN 0304-3975, http://dx.doi.org/10.1016/S0304-3975(02)00613-8.
-http://www.sciencedirect.com/science/article/pii/S0304397502006138
-
-[6] ACM Digital Library
+[1] ACM Digital Library
 dl.acm.org.proxy.lib.pdx.edu,. (2015). Retrieved 11 February 2015
 
+[2] Cormen, Thomas H., Clifford Stein, Ronald L. Rivest, and Charles E. Leiserson.
+2001. Introduction to Algorithms (2nd ed.). McGraw-Hill Higher Education. 
+
+[3] Demaine, Erik, courses.csail.mit.edu,. (2011). Retrieved 8 March 2015, from http://courses.csail.mit.edu/6.006/spring11/lectures/lec15.pdf
+
+[4] Harel, David, Proving the correctness of regular deterministic programs: A unifying survey using dynamic logic, Theoretical Computer Science, Volume 12, Issue 1, September 1980, Pages 61-81, ISSN 0304-3975, http://dx.doi.org/10.1016/0304-3975(80)90005-5.
+http://www.sciencedirect.com/science/article/pii/0304397580900055
+
+[5] Magzhan, Kairanbay, and Hajar Mat Jani, 'A Review And Evaluations Of Shortest Path Algorithms'. International Journal of Scientific & Technology Research, Volume 2, Issue 6, June 2013, Pages 99-104, ISSN 2277-8616. Web. 15 Feb. 2015.
+http://www.ijstr.org/final-print/june2013/A-Review-And-Evaluations-Of-Shortest-Path-Algorithms.pdf
+
+[6] Meyer, Ulrich, 'Average-case complexity of single-source shortest-paths algorithms: lower and upper bounds', Journal of Algorithms, Volume 48, Issue 1, August 2003, Pages 91-134, ISSN 0196-6774, http://dx.doi.org/10.1016/S0196-6774(03)00046-4.
+http://www.sciencedirect.com/science/article/pii/S0196677403000464
+
+[7] Saunders, Shane, and Tadao Takaoka, 'Improved shortest path algorithms for nearly acyclic graphs'. Theoretical Computer Science, Volume 293, Issue 3, 9 February 2003, Pages 535-556, ISSN 0304-3975, http://dx.doi.org/10.1016/S0304-3975(02)00613-8.
+http://www.sciencedirect.com/science/article/pii/S0304397502006138
+
+[8] Yan, Melissa, math.mit.edu,. (2014). Retrieved 9 March 2015, from http://math.mit.edu/~rothvoss/18.304.3PM/Presentations/1-Melissa.pdf
+
 \end{lstlisting}
+
+\section{Supplementary Materials}
+\begin{verbatim}
+GitHub Repository for the project:
+https://github.com/dcobbley/AlgorithmsProject350/wiki
+\end{verbatim}
+
 \end{document}
