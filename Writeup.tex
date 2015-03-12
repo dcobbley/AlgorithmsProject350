@@ -4,6 +4,14 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{verbatim} % Allows Multi-line comments 
 \usepackage{multicol}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{listings}
+\lstset{
+basicstyle=\small\ttfamily,
+columns=flexible,
+breaklines=true
+}
 
 \usetikzlibrary{automata,positioning}
 \newcommand{\encode}[1]{\langle #1 \rangle}
@@ -18,16 +26,61 @@
 
 \section{Introduction}
 For our algorithm comparison and testing, we chose to compare two shortest-path algorithms.  After examining different algorithms that found shortest path between nodes of a graph, we chose Bellman-Ford and Dijkstra's algorithms.
-We compared the Bellman-Ford and Dijkstra's shortest path algorithm on sets of data and compared several sets of metrics to see which algorithm is more efficient.
+We compared the Bellman-Ford and Dijkstra's shortest path algorithm on sets of data and compared several sets of metrics to see which algorithm is more efficient.  To supplement our own testing, we researched the two algorithms and recorded their textbook time complexities to compare with our own tests.
 
+\section{Terms}
+In a directed graph $G=(V,E)$ with $V$ vertices and $E$ weighted edges:
+
+The shortest path weight from $u$ to $v$:
+
+$\delta(u,v) = \begin{cases}
+\text{min} \hspace{5 pt} \{w(p):u\overset{p}{\leadsto}v\} \hspace{5 pt} \text{if there is a path from $u$ to $v$}\\
+\infty \hspace{5 pt} \text{otherwise}
+\end{cases}$
+\\
+\\
+Weight $w(p)$ of path $p$:
+
+$w(p)=\displaystyle\sum_{i=1}^{k} w(v_{i-1},v_{i})$
+\\
+\\
+(Cormen, 2001)
 \section{Background info}
 The Dijkstra's algorithm we selected has a time complexity of $O((|V|+|E|)+log|V|)$.
+The algorithm used here was the version modified from Dijkstra's original algorithm, and uses a min-priority queue and a Fibonacci heap to improve time complexity.  Dijkstra's as used here is a single-source shortest path algorithm.  It builds a shortest path tree to find the shortest path between a node and all other nodes in the graph it is traversing. (Kairanbay, 2013)
+
 
 Correctness: 
 
-Completeness:
+Inductive proof:
 
-Based on the proof seen in Cormen, et al, and our adaptations for the code.
+Invariant: For each node n $\in$ G, d(n) is the length of the shortest m $\rightarrow$ n path.
+
+Base case: $\mid$ G $\mid$  = 1
+
+Inductive hypothesis: Assume this is true for $\mid$ G $\mid$ = k $\geq$ 1.
+
+1. Let v be next node added to G, and let n $\rightarrow$ v be the chosen edge.
+
+2. The shortest m $\rightarrow$ n path plus (n, v) is an m $\rightarrow$ v path of length $\pi$(v)
+
+3. Consider any m $\rightarrow$ v path P.
+    We'll see that it's no shorter than $\pi$(v)
+
+4. Let x $\rightarrow$ y be the first edge in P that leaves G, 
+    and let P' be the sub-path to x.
+
+5. Path P is too long as soon as it leaves G.
+
+$l(P) \geq l(P') + l(x,y) \geq d(x) + l(x,y) \geq \pi(y) \geq \pi(v)$
+
+(Harel, 1980)
+
+
+Completeness:
+Dijkstra's algorithm is complete based on the fact that it will always terminate and have valid output given a valid input.
+The algorithm will always terminate given valid input because Dijkstra's algorithm considers all vertices of the graph. As such, the set $V$ of all vertices, will eventually match the set of vertices that are analyzed by the algorithm for building shortest paths.  Once all input has been consumed, the algorithm alchitecture guarentees a valid output for a given valid input.
+\\Based on the proof seen in Cormen (2001), Harel(1980),  and our adaptations for the code.
 
 Psuedocode:
 \begin{verbatim}
@@ -39,10 +92,19 @@ Our Bellman-Ford algorithm has a time complexity of $O(|V||E|)$.
 Correctness:
 
 Completeness:
+\\Based on the proof seen in Cormen (2001).
 
-Based on the proof seen in Cormen, et al.
-
-Psuedocode:
+Psuedocode:\\
+for $v \in V\\
+ v.d = \infty\\
+ v.\pi = \text{None}\\
+s.d = 0\\
+\text{for} i \text{from} 1 \text{to} \mid V \mid -1:\\
+ \text{for} (u,v) \in E:\\
+  \text{relax}(u,v):\\
+   \text{if} v.d > u.d + w(u,v):\\
+	v.d = u.d + w(u,v)\\
+	 v.\pi = u$\\
 \begin{verbatim}
 
 \end{verbatim}
@@ -60,17 +122,24 @@ https://github.com/mneedham/algorithms2/tree/master/shortestpath
 \end{verbatim}
 
 
-\begin{verbatim}
+\begin{lstlisting}
+[1] Cormen, Thomas H., Clifford Stein, Ronald L. Rivest, and Charles E. Leiserson.
+2001. Introduction to Algorithms (2nd ed.). McGraw-Hill Higher Education. 
+
+[2] Harel, David, Proving the correctness of regular deterministic programs: A unifying survey using dynamic logic, Theoretical Computer Science, Volume 12, Issue 1, September 1980, Pages 61-81, ISSN 0304-3975, http://dx.doi.org/10.1016/0304-3975(80)90005-5.
+http://www.sciencedirect.com/science/article/pii/0304397580900055
+
+[3] Magzhan, Kairanbay, and Hajar Mat Jani, 'A Review And Evaluations Of Shortest Path Algorithms'. International Journal of Scientific & Technology Research, Volume 2, Issue 6, June 2013, Pages 99-104, ISSN 2277-8616. Web. 15 Feb. 2015.
 http://www.ijstr.org/final-print/june2013/A-Review-And-Evaluations-Of-Shortest-Path-Algorithms.pdf
 
-http://www.sciencedirect.com.proxy.lib.pdx.edu/science/article/pii/S0304397502006138#
+[4] Meyer, Ulrich, 'Average-case complexity of single-source shortest-paths algorithms: lower and upper bounds', Journal of Algorithms, Volume 48, Issue 1, August 2003, Pages 91-134, ISSN 0196-6774, http://dx.doi.org/10.1016/S0196-6774(03)00046-4.
+http://www.sciencedirect.com/science/article/pii/S0196677403000464
 
-http://www.sciencedirect.com.proxy.lib.pdx.edu/science/article/pii/S0196677403000464
+[5] Saunders, Shane, and Tadao Takaoka, 'Improved shortest path algorithms for nearly acyclic graphs'. Theoretical Computer Science, Volume 293, Issue 3, 9 February 2003, Pages 535-556, ISSN 0304-3975, http://dx.doi.org/10.1016/S0304-3975(02)00613-8.
+http://www.sciencedirect.com/science/article/pii/S0304397502006138
 
-ACM
-http://dl.acm.org.proxy.lib.pdx.edu/dl.cfm
+[6] ACM Digital Library
+dl.acm.org.proxy.lib.pdx.edu,. (2015). Retrieved 11 February 2015
 
-Thomas H. Cormen, Clifford Stein, Ronald L. Rivest, and Charles E. Leiserson.
-2001. Introduction to Algorithms (2nd ed.). McGraw-Hill Higher Education. 
-\end{verbatim}
+\end{lstlisting}
 \end{document}

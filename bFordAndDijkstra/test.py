@@ -82,22 +82,22 @@ def Dijkstra(Graph, startIndex):
     num = Graph.numNodes - 1
 
     while (num !=0) :
-        print "-- loop: ", num
+        #print "-- loop: ", num
         num = num - 1
         possiblePaths = {}
         for y in doneNodes:
             d = dict((p,q) for p,q in Graph.NodesList[y].AdjacentNodes.iteritems() if p.index not in doneNodes)
             if (len(d) != 0):
                 aNode = min(d, key=d.get)
-                print "-- check Node: ", aNode.index
+                #print "-- check Node: ", aNode.index
                 possiblePaths[tuple([y,aNode.index])] = d[aNode] + shPath[y]
         selectEdge = min(possiblePaths, key=possiblePaths.get)
         nextNodeIndex = selectEdge[1]
-        print "-- select edge: ", y,"->", nextNodeIndex
+        #print "-- select edge: ", y,"->", nextNodeIndex
         shPath[nextNodeIndex] = possiblePaths[selectEdge]
         doneNodes.append(nextNodeIndex)
 
-    print "shortest paths: ", shPath
+    #print "shortest paths: ", shPath
 
 '''
 ============================================================================
@@ -123,7 +123,7 @@ body of the code starts here
 '''
 
 #file io
-file = open(os.path.dirname(os.path.realpath(__file__)) + "/g_medium.txt")
+file = open(os.path.dirname(os.path.realpath(__file__)) + "/large.txt")
 vertices, edges = map(lambda x: int(x), file.readline().replace("\n", "").split(" "))
 
 #instance of the class object
@@ -152,7 +152,7 @@ for v in range(0, vertices):
     cache[v] = float("inf")
 
 for i in range(1, vertices):
-  print(cache)
+  #print(cache)
   for v in range(0, vertices):
     previous_cache = cache
     least_adjacent_cost = calculate_least_adjacent_cost(adjacency_list, i, v, previous_cache)
@@ -173,6 +173,6 @@ print("Shortest Path: " + str(shortest_path))
 '''
 Start of the Dijkstra
 '''
-print "Dijkstra algorithm starting from node ", startindex, " ......"
+#print "Dijkstra algorithm starting from node ", startindex, " ......"
 #print g
 Dijkstra(g,startindex)

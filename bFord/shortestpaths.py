@@ -10,7 +10,7 @@ def calculate_least_adjacent_cost(adjacency_list, i, v, cache):
         least_adjacent_cost = adjacent_cost
     return least_adjacent_cost
 
-file = open(os.path.dirname(os.path.realpath(__file__)) + "/g_small3.txt")
+file = open(os.path.dirname(os.path.realpath(__file__)) + "/g_medium.txt")
 vertices, edges = map(lambda x: int(x), file.readline().replace("\n", "").split(" "))
 
 adjacency_list = [[] for k in xrange(vertices)]
