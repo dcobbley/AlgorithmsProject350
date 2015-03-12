@@ -36,7 +36,6 @@ breaklines=true
 For our algorithm comparison and testing, we chose to compare two shortest-path algorithms.  After examining different algorithms that found shortest path between nodes of a graph, we chose Bellman-Ford and Dijkstra's algorithms.  We chose these algorithms because they are both well-researched shortest-path algorithms that have had algorithmic and data structure improvements.  Their asymptotic time complexity is close, but not identical; we felt that that would lead to interesting test results when we ran tests ourselves.
 
 For our own testing procedures, we compared the Bellman-Ford and Dijkstra's shortest path algorithm on identical sets of data and compared several sets of metrics to see which algorithm is more efficient.  To supplement our own testing, we researched the two algorithms and recorded their textbook time complexities to compare with our own tests.
-
 \section{Terms}
 In a directed graph $G=(V,E)$ with $V$ vertices and $E$ weighted edges:
 
@@ -52,15 +51,12 @@ Weight $w(p)$ of path $p$:
 
 $w(p)=\displaystyle\sum_{i=1}^{k} w(v_{i-1},v_{i})$
 \\
-\\
 (From source $^3$)
 \section{Background info}
 The optimized Dijkstra's algorithm has a time complexity of $O((|V|+|E|)+log|V|)$.
 The algorithm with this time complexity is the version modified from Dijkstra's original algorithm, and uses a min-priority queue and a Fibonacci heap to improve time complexity.  Dijkstra's as used here is a single-source shortest path algorithm.  It builds a shortest path tree to find the shortest path between a node and all other nodes in the graph it is traversing.$^6$
 
-
 \subsection{Correctness:} 
-
 \begin{proof}
 By Induction:
 Invariant: For each node n $\in$ G, d(n) is the length of the shortest m $\rightarrow$ n path.
@@ -77,12 +73,9 @@ Inductive hypothesis: Assume this is true for $\mid$ G $\mid$ = k $\geq$ 1.
     and let P' be the sub-path to x.
 \item Path P is too long as soon as it leaves G.
 \end{enumerate}
-
-$l(P) \geq l(P') + l(x,y) \geq d(x) + l(x,y) \geq \pi(y) \geq \pi(v)$
+\hspace{10 pt}$l(P) \geq l(P') + l(x,y) \geq d(x) + l(x,y) \geq \pi(y) \geq \pi(v)$
 \end{proof}
-
 (From source $^5$)
-
 
 \subsection{Completeness:}
 Dijkstra's algorithm is complete based on the fact that it will always terminate and have valid output given a valid input.
@@ -116,9 +109,6 @@ do u $\leftarrow$ min-distance(Q,dist)
 return distance
 
 (From source $^9$)
-\begin{verbatim}
-
-\end{verbatim}
 
 Optimized Bellman-Ford algorithm has a time complexity of $O(|V||E|)$.
 
@@ -192,14 +182,14 @@ Note: relax() maintains the invariant that $v.d \geq \delta(s,v) \forall v \in V
 
 \subsection{Interlude to ADT:}
 
-Graphs can be represented in multiple ways because it is an abstract data type.  The data structure that is being fed into the algorithm can affect the run time of the program.  Adding can cost O($\mid$ E $\mid$) for adjacency list, O($\mid V{^2} \mid$) for adjacency matrix, and O($\mid$ V $\mid \times \mid$ E $\mid$) for the incidence matrix.  A query can give O($\mid$ V $\mid$) for adjacency list, O(1) for adjacency matrix, and O($\mid$ E $\mid$) for incidence matrix. These differences in how the graph itself is implemented will have major implications on run time due to graph construction.
+Graphs can be represented in multiple ways because it is an abstract data type.  The data structure that is being fed into the algorithm can affect the run time of the program.  Adding can cost O($\mid$ E $\mid$) for adjacency list, O($\mid V{^2} \mid$) for adjacency matrix, and O($\mid$ V $\mid \cdot \mid$ E $\mid$) for the incidence matrix.  A query can give O($\mid$ V $\mid$) for adjacency list, O(1) for adjacency matrix, and O($\mid$ E $\mid$) for incidence matrix. These differences in how the graph itself is implemented will have major implications on run time due to graph construction.
 
 \subsection{Basis for Bellman-Ford and Dijkstra:}
 
-We know that Bellman-Ford operates on O($\mid$ V $\mid \times \mid$ E $\mid$) based  on the fact that there are two loops on vertices and edges.  We also know that unmodified Dijkstra operates on O($\mid V{^2} \mid$) due to loops to examine all vertices for shortest paths and iterate through all vertices.  Adding data structures or abstract data types can enhance the speed of the Bellman-Ford and Dijkstra greatly by improving the retrieval of edges with the least weight or by taking advantage of the properties of graphs.
+We know that Bellman-Ford operates on O($\mid$ V $\mid \cdot \mid$ E $\mid$) based  on the fact that there are two loops on vertices and edges.  We also know that unmodified Dijkstra operates on O($\mid V{^2} \mid$) due to loops to examine all vertices for shortest paths and iterate through all vertices.  Adding data structures or abstract data types can enhance the speed of the Bellman-Ford and Dijkstra greatly by improving the retrieval of edges with the least weight or by taking advantage of the properties of graphs.
 
 \subsection{Improving Bellman-Ford:}
-Bellman-Ford has been improved upon in a couple of ways.  Yen$^{10}$ described two improvements for graphs without negative-weight cycles.  These changes did not alter the worst case of O($\mid$ V $\mid \times \mid$ E $\mid$).  
+Bellman-Ford has been improved upon in a couple of ways.  Yen$^{10}$ described two improvements for graphs without negative-weight cycles.  These changes did not alter the worst case of O($\mid$ V $\mid \cdot \mid$ E $\mid$).  
 Yen$^{10}$ prescribed a change to avoid relaxing edges out of the vertices a second time if no changes have been made. This helped reduce cost at constant-factor savings when dealing with dense graphs because constantly iterating over edges and assigning them the original weight would make the algorithm more expensive.  This method dealt with the properties of the graph and thus does not translate to all cases of the graph.
 
 
@@ -209,10 +199,10 @@ The second method gives arbitrary linear order to the vertices and partitioning 
 We can also take advantage of the best case scenario of the graph that if it is a directed acyclic graph we can make further improvements to Bellman-Ford.  We can obtain a O($\mid$V $\mid + \mid$ E $\mid$) by utilizing a topological sort in the algorithm, which enhances the loop by giving neighbors more readily.  This would allow us to perform depth-first search for O($\mid$V $\mid + \mid$ E $\mid$).  We can then walk through the vertices and relax the edges to get the shortest paths in total of O($\mid$V $\mid + \mid$ E $\mid$).
 
 \subsection{Improving Dijkstra:}
-Dijkstra's algorithm can be made to go faster than $O(|V|^2)$ by using data structures to make the retrieval of the shortest path at a given node faster. A priority queue implemented with a min-heap can lead to faster computing times. We can use insert\_with\_priority, decrease\_priority, and get\_minimum.$^{12}$ We can store the possible paths in the queue and obtain the shortest path, which improves the performance of Dijkstra's to $O(|V|+|E|log |V|)$. 
+Dijkstra's algorithm can be made to go faster than $O(|V|^2)$ by using data structures to make the retrieval of the shortest path at a given node faster. A priority queue implemented with a min-heap can lead to faster computing times. We can use \texttt{insert\_with\_priority}, \texttt{decrease\_priority}, and \texttt{get\_minimum}. $^{12}$ We can store the possible paths in the queue and obtain the shortest path, which improves the performance of Dijkstra's to $O(|V|+|E|log |V|)$. 
 	
 	
-Another data structure that was suggested to improve Dijkstra's algorithm is a Fibonacci heap, which can speed up the process to $O(|E| + |V| log |V|)$ because its get\_minimum$^{12}$ is $O(1)$ amortized time. Insert, decrease\_key, and merge work in constant amortized time, which improves upon the min heap priority queue.$^{12}$ The properties of the graph can affect these performances based on the number of edges in relation to vertices. If the graph has more edges than vertices, then intuitively we would like to have the log modifier be attached to vertices, which makes the Fibonacci heap ideal. If there are more vertices than edges, then we want the log modifier to be attached to the edges, which would make the Min heap better. Also, if the graph is a DAG, then the same topological sort with a depth-first search can also be used to improve the algorithm in a similar fashion as Bellman-Ford. 
+Another data structure that was suggested to improve Dijkstra's algorithm is a Fibonacci heap, which can speed up the process to $O(|E| + |V| log |V|)$ because its \texttt{get\_minimum} is $O(1)$ amortized time. \texttt{Insert}, \texttt{decrease\_key}, $^{12}$ and \texttt{merge} work in constant amortized time, which improves upon the min heap priority queue.$^{12}$ The properties of the graph can affect these performances based on the number of edges in relation to vertices. If the graph has more edges than vertices, then intuitively we would like to have the log modifier be attached to vertices, which makes the Fibonacci heap ideal. If there are more vertices than edges, then we want the log modifier to be attached to the edges, which would make the Min heap better. Also, if the graph is a DAG, then the same topological sort with a depth-first search can also be used to improve the algorithm in a similar fashion as Bellman-Ford. 
 
 
 Another problem with Dijkstra's algorithm is that methods needed to speed up the process may have low worst case time bounds, but are incredibly hard to implement. We see this in the case of using the Fibonacci heap and even Brodal queue, which have very low worst case time bounds.  The creators themselves have described them to be "quite complicated" and "[not] applicable in practice".$^{11}$
@@ -224,12 +214,12 @@ The use of data structures in decreasing the running time of Dijkstra and Bellma
 \section{Testing Procedure}
 
 We modified code for Dijktra's and Bellman-Ford algorithms found online (listed in the Sources section), and ran tests to compare the time complexity of each algorithm with controlled data sets.  We also controlled for differences in operating system efficiency; we chose Linux as our testing platform.  In the course of testing, we also used Python metrics tools (cProfile and time).  Once we located the source code we chose to modify, we first ran preliminary tests for correctness and rough time estimates.  Both the Python time and cProfile tools were run from the command line, to verify program correctness and completeness at the most basic level.  Once the raw source code passed these tests, we could modify the code.
-To modify the code, we changed the data reading functionality to read in large data sets (200,000 nodes).  We needed a large data set to make a meaningful time comparison.
+To modify the code, we changed the data reading functionality to read in large data sets (20,000 nodes).  We needed a large data set to make a meaningful time comparison.
  We also modified the code to read in data sets in the same way, so that our tests would not be affected by differences in data processing.
  
 
 \section{Analysis}
-For this project, we used two data sets of sample data. One graph with 200 vertecies and 3,734 edges. The other larger set with 20,000 vertecies and 999,387 edges. We used cProfile in python to analyze our software runtime. A quick snippet of our output:
+For this project, we used two data sets of sample data. One graph with 200 vertices and 3,734 edges. The other larger set with 20,000 vertices and 999,387 edges. We used cProfile in python to analyze our software runtime. A quick snippet of our output:
 \begin{verbatim}
                     bfordresults.txt
 451518 function calls (411118 primitive calls) in 0.793 seconds
@@ -238,17 +228,18 @@ For this project, we used two data sets of sample data. One graph with 200 verte
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
         1    0.103    0.103    0.793    0.793 bFord.py:1(<module>)
 40400/200    0.177    0.000    0.476    0.002 /usr/lib/python2.7/copy.py:145(deepcopy)
-  400/200    0.057    0.000    0.474    0.002 /usr/lib/python2.7/copy.py:226(_deepcopy_list)
+  400/200    0.057    0.000    0.474    0.002 /usr/lib/python2.7/copy.py:226
     40000    0.183    0.000    0.183    0.000 bFord.py:12(calculate_least_adjacent_cost)
     40400    0.081    0.000    0.126    0.000 /usr/lib/python2.7/copy.py:267(_keep_alive)
     84142    0.049    0.000    0.049    0.000 {method 'append' of 'list' objects}
     80800    0.048    0.000    0.048    0.000 {method 'get' of 'dict' objects}
     81400    0.045    0.000    0.045    0.000 {id}
     40001    0.025    0.000    0.025    0.000 {min}
-    40000    0.023    0.000    0.023    0.000 /usr/lib/python2.7/copy.py:198(_deepcopy_atomic)
+    40000    0.023    0.000    0.023    0.000 /usr/lib/python2.7/copy.py:198
 \end{verbatim}
 
-From data like this over our sample graphs, we got some very interesting results. \\
+From data like this over our sample graphs, we got some very interesting results. 
+\pagebreak
 \begin{multicols}{2}
 
 \hspace{20 pt} \textbf{Data Set}\\
@@ -312,9 +303,9 @@ Bellman-Ford & 2405898824 & 13428.234 \\
 One of the most interesting results from our analysis was that we got very consistent run time results. More so the fact that our implementation of Dijkstra had a longer run time and less number of function calls, while our Bellman-Ford had double the number of function calls while having less than half the run-time. We actually were so confused by this that we tested our software with two different metric tools, including putting counters in the source code to verify this was true. We can only speculate that something to do with our language of choice, system hardware, or implementation of the algorithms had come into play.
 
 When we began getting results back from our data, we immediately began calculating where else these function calls came from. We noted that while our Dijkstra runs in $O(v^2)$ we had not thought about the fact that building the graph takes $O(v^2)$ as well as source input is $O(E)$. While these values are trivial in the theoretical world and get factored out as a constant or smaller value, they still add up when the code runs. 
-Our Bellman-Ford runs in $O(v \cdot E)$ but its adjacency list takes $O(v+E)$ with source input taking $O(E)$. We enjoyed running the software and seeing visually how much quicker this algorithm was to build versus the graph in Dijkstras.
+Our Bellman-Ford runs in O($\mid$ V $\mid \cdot \mid$ E $\mid$) but its adjacency list takes O($\mid$V $\mid + \mid$ E $\mid$) with source input taking $O(E)$. We enjoyed running the software and seeing visually how much quicker this algorithm was to build versus the graph in Dijkstra's.
 
-This led us to look at how python implements dictionaries and lists in python.
+This led us to look at how Python implements dictionaries and lists in Python.
 \begin{multicols}{2}
 
 \hspace{35 pt} \textbf{List}\\
@@ -345,21 +336,20 @@ Iteration & $O(n)$  & $O(n)$ \\
 \hline
 \end{tabular}
 \end{multicols}
-\hspace{50 mm} \textit{Taken from the Python manual$^{15}$.}
+\hspace{50 mm} \textit{Taken from the Python manual$^{15}$.}\\
 
 The data structure big O of the two data structures seems to have a time complexity equivalent to each other. 
-We began to realize our function calls were not doing the same amount of work as we thought they were. We began going back over our code line by line to determine the cause. We discovered that the library we called for creating dictionaries takes six times longer than the implementation that the creators of Python recommend for this operation. We also noticed that our Bellman-Ford algorithm uses the proper way to create dictionaries, giving it a speed up far greater than the implementation of our Dijkstra algorithm.
+We began to realize our function calls were not doing the same amount of work as we thought they were. We began going back over our code line by line to determine the cause. We discovered that the library we called for creating dictionaries takes six times longer than the implementation that the creators of Python recommend for this operation. We also noticed that our Bellman-Ford algorithm uses the proper way to create dictionaries, giving it a speed up far greater than the implementation of our Dijkstra's algorithm.
 
+\pagebreak
 \section{Conclusion}
-We were astonished when we ran these two algorithms to see just how many operations were performed. We quickly learned that implementation is everything. You can follow the algorithm to the letter, and still end up with mixed results. We knew that choosing Python for implementation certainly would not be the fastest, but this really goes to show how a scripting language can hide the implementation details. The only difference between the dictionary structures function call which slowed us down so much was:
+We were astonished when we ran these two algorithms to see just how many operations were performed. We quickly learned that implementation is everything. You can follow the algorithm to the letter, and still end up with mixed results. We knew that choosing Python for implementation certainly would not be the fastest, but this really goes to show how a functional interpretive language can hide the implementation details. The only difference between the dictionary structures' function call (the one that slowed the runtime down so much) was:
 
 \begin{verbatim}
-dict{}   VS   dict()
+dict={}   VS   dict()
 \end{verbatim}
 
-This coupled with fact that we implemented a dictionary of dictionaries each with a rate 6 times slower gave us very poor run time results.
-
-Asside from this fact, we did see that the count of the main operations matches our calculated big O. With the data set we used, our big O matched, that is once we started taking into account operations like building the graphs with the structures we used, as well as debug print statement operations. Most things taking only $O(n)$ but still needed to be taken into account when trying to match the calculated to actual results
+This coupled with fact that we implemented a dictionary of dictionaries (each with a rate 6 times slower) gave us very poor run time results.  Aside from this fact, we did see that the count of the elementary operations matches our calculated asymptotic time complexity. Once we took operations like graph building and debug print statements into account, our Big O time complexity from Bellman-Ford and Dijkstra's matched our calculated time complexity for the data sets we used. Most trivial operations took only $O(V)$ or $O(E)$ but still needed to be taken into account when trying to match the calculated complexity to actual results.  We found time complexity to be more dependent on language implementation than we initially thought.  In future, comparisons between different language implementations would be interesting to analyze.
 \section{Sources}
 
 \begin{verbatim}
